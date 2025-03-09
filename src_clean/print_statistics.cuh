@@ -87,74 +87,79 @@ static inline void ComputeFugacity(double& AverageWr, double& AverageMu, double&
   Fugacity = WIG * Constants.BoltzmannConstant * SystemComponents.Temperature * (double) SystemComponents.NumberOfMolecule_for_Component[adsorbate] / (Box.Volume * 1.0e-30 * AverageWr);
 }
 
-static inline void Print_Widom_Statistics(Components& SystemComponents, Boxsize Box, Units& Constants, size_t comp)
+static inline void Print_Widom_Statistics(Components& SystemComponents, Boxsize& Box, Units& Constants)
 {
-  Move_Statistics MoveStats = SystemComponents.Moves[comp];
-  double2 totRosen = {0.0, 0.0};
-  double2 totMu    = {0.0, 0.0};
-  double2 totHenry = {0.0, 0.0};
-  double2 totFuga  = {0.0, 0.0};
-  fprintf(SystemComponents.OUTPUT, "=====================Rosenbluth Summary=====================\n");
-  fprintf(SystemComponents.OUTPUT, "There are %zu blocks\n", SystemComponents.Nblock);
-  for(size_t i = 0; i < SystemComponents.Nblock; i++)
+  for(size_t comp = SystemComponents.NComponents.y; comp < SystemComponents.NComponents.x; comp++)
+  // LOOP OVER ALL THE ADSORBATE ATOMS //
   {
-    fprintf(SystemComponents.OUTPUT, "=====BLOCK %zu=====\n", i);
-    fprintf(SystemComponents.OUTPUT, "Widom Performed: %.1f\n", MoveStats.Rosen[i].Total.z);
-    if(MoveStats.Rosen[i].Total.z > 0)
+    Move_Statistics MoveStats = SystemComponents.Moves[comp];
+    // CHECK IF WIDOM MOVE IS USED //
+    double2 totRosen = {0.0, 0.0};
+    double2 totMu    = {0.0, 0.0};
+    double2 totHenry = {0.0, 0.0};
+    double2 totFuga  = {0.0, 0.0};
+    fprintf(SystemComponents.OUTPUT, "=====================Rosenbluth Summary=====================\n");
+    fprintf(SystemComponents.OUTPUT, "There are %zu blocks\n", SystemComponents.Nblock);
+    for(size_t i = 0; i < SystemComponents.Nblock; i++)
     {
-      double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
-      ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Total, Constants);
-      fprintf(SystemComponents.OUTPUT, "(Total) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
-      fprintf(SystemComponents.OUTPUT, "(Total) Averaged Excess Mu: %.10f\n", AverageMu);
-      fprintf(SystemComponents.OUTPUT, "(Total) Averaged Henry Coefficient: %.10f\n", AverageHenry);
-      fprintf(SystemComponents.OUTPUT, "(Total) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
-      totRosen.x += AverageWr; totRosen.y += AverageWr * AverageWr;
-      totMu.x    += AverageMu; totMu.y    += AverageMu * AverageMu;
-      totHenry.x += AverageHenry; totHenry.y += AverageHenry * AverageHenry;
-      totFuga.x  += Fugacity;  totFuga.y  += Fugacity * Fugacity;
+      fprintf(SystemComponents.OUTPUT, "=====BLOCK %zu=====\n", i);
+      fprintf(SystemComponents.OUTPUT, "Widom Performed: %.1f\n", MoveStats.Rosen[i].Total.z);
+      if(MoveStats.Rosen[i].Total.z > 0)
+      {
+        double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
+        ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Total, Constants);
+        fprintf(SystemComponents.OUTPUT, "(Total) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
+        fprintf(SystemComponents.OUTPUT, "(Total) Averaged Excess Mu: %.10f\n", AverageMu);
+        fprintf(SystemComponents.OUTPUT, "(Total) Averaged Henry Coefficient: %.10f\n", AverageHenry);
+        fprintf(SystemComponents.OUTPUT, "(Total) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
+        totRosen.x += AverageWr; totRosen.y += AverageWr * AverageWr;
+        totMu.x    += AverageMu; totMu.y    += AverageMu * AverageMu;
+        totHenry.x += AverageHenry; totHenry.y += AverageHenry * AverageHenry;
+        totFuga.x  += Fugacity;  totFuga.y  += Fugacity * Fugacity;
+      }
+      if(MoveStats.Rosen[i].Insertion.z > 0)
+      {
+        double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
+        ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Insertion, Constants);
+        fprintf(SystemComponents.OUTPUT, "(Insertion) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
+        fprintf(SystemComponents.OUTPUT, "(Insertion) Averaged Excess Mu: %.10f\n", AverageMu);
+        fprintf(SystemComponents.OUTPUT, "(Insertion) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
+      } 
+      if(MoveStats.Rosen[i].Deletion.z > 0)
+      { 
+        double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
+        ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Deletion, Constants);
+        fprintf(SystemComponents.OUTPUT, "(Deletion) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
+        fprintf(SystemComponents.OUTPUT, "(Deletion) Averaged Excess Mu: %.10f\n", AverageMu);
+        fprintf(SystemComponents.OUTPUT, "(Deletion) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
+      }
     }
-    if(MoveStats.Rosen[i].Insertion.z > 0)
-    {
-      double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
-      ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Insertion, Constants);
-      fprintf(SystemComponents.OUTPUT, "(Insertion) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
-      fprintf(SystemComponents.OUTPUT, "(Insertion) Averaged Excess Mu: %.10f\n", AverageMu);
-      fprintf(SystemComponents.OUTPUT, "(Insertion) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
-    } 
-    if(MoveStats.Rosen[i].Deletion.z > 0)
-    { 
-      double AverageWr = 0.0; double AverageMu = 0.0; double AverageHenry = 0.0; double Fugacity = 0.0;
-      ComputeFugacity(AverageWr, AverageMu, AverageHenry, Fugacity, Box, SystemComponents, MoveStats.Rosen[i].Deletion, Constants);
-      fprintf(SystemComponents.OUTPUT, "(Deletion) Averaged Rosenbluth Weight: %.10f\n", AverageWr);
-      fprintf(SystemComponents.OUTPUT, "(Deletion) Averaged Excess Mu: %.10f\n", AverageMu);
-      fprintf(SystemComponents.OUTPUT, "(Deletion) Converted to Fugacity: %.10f [Pascal], Temp: %.5f [K]\n", Fugacity, SystemComponents.Temperature);
-    }
+
+    double2 AvgBlockRosen = {0.0, 0.0};
+    AvgBlockRosen.x = totRosen.x / (double) SystemComponents.Nblock;
+    AvgBlockRosen.y = totRosen.y / (double) SystemComponents.Nblock;
+    double RosenError = 2.0 * pow((AvgBlockRosen.y - AvgBlockRosen.x * AvgBlockRosen.x), 0.5);
+
+    double2 AvgBlockMu;
+    AvgBlockMu.x = totMu.x / (double) SystemComponents.Nblock;
+    AvgBlockMu.y = totMu.y / (double) SystemComponents.Nblock;
+    double MuError = 2.0 * pow((AvgBlockMu.y - AvgBlockMu.x * AvgBlockMu.x), 0.5);
+
+    double2 AvgBlockHenry;
+    AvgBlockHenry.x = totHenry.x / (double) SystemComponents.Nblock;
+    AvgBlockHenry.y = totHenry.y / (double) SystemComponents.Nblock;
+    double HenryError = 2.0 * pow((AvgBlockHenry.y - AvgBlockHenry.x * AvgBlockHenry.x), 0.5);
+
+    double2 AvgBlockFuga;
+    AvgBlockFuga.x = totFuga.x / (double) SystemComponents.Nblock;
+    AvgBlockFuga.y = totFuga.y / (double) SystemComponents.Nblock;
+    double FugaError = 2.0 * pow((AvgBlockFuga.y - AvgBlockFuga.x * AvgBlockFuga.x), 0.5);
+    fprintf(SystemComponents.OUTPUT, "=========================AVERAGE========================\n");
+    fprintf(SystemComponents.OUTPUT, "Averaged Rosenbluth Weight: %.10f +/- %.10f\n", AvgBlockRosen.x, RosenError);
+    fprintf(SystemComponents.OUTPUT, "Averaged Excess Chemical Potential: %.10f +/- %.10f\n", AvgBlockMu.x, MuError);
+    fprintf(SystemComponents.OUTPUT, "Averaged Henry Coefficient [mol/kg/Pa]: %.10g +/- %.10g\n", AvgBlockHenry.x, HenryError);
+    fprintf(SystemComponents.OUTPUT, "Averaged Fugacity: %.10f +/- %.10f\n", AvgBlockFuga.x, FugaError);
   }
-
-  double2 AvgBlockRosen = {0.0, 0.0};
-  AvgBlockRosen.x = totRosen.x / (double) SystemComponents.Nblock;
-  AvgBlockRosen.y = totRosen.y / (double) SystemComponents.Nblock;
-  double RosenError = 2.0 * pow((AvgBlockRosen.y - AvgBlockRosen.x * AvgBlockRosen.x), 0.5);
-
-  double2 AvgBlockMu;
-  AvgBlockMu.x = totMu.x / (double) SystemComponents.Nblock;
-  AvgBlockMu.y = totMu.y / (double) SystemComponents.Nblock;
-  double MuError = 2.0 * pow((AvgBlockMu.y - AvgBlockMu.x * AvgBlockMu.x), 0.5);
-
-  double2 AvgBlockHenry;
-  AvgBlockHenry.x = totHenry.x / (double) SystemComponents.Nblock;
-  AvgBlockHenry.y = totHenry.y / (double) SystemComponents.Nblock;
-  double HenryError = 2.0 * pow((AvgBlockHenry.y - AvgBlockHenry.x * AvgBlockHenry.x), 0.5);
-
-  double2 AvgBlockFuga;
-  AvgBlockFuga.x = totFuga.x / (double) SystemComponents.Nblock;
-  AvgBlockFuga.y = totFuga.y / (double) SystemComponents.Nblock;
-  double FugaError = 2.0 * pow((AvgBlockFuga.y - AvgBlockFuga.x * AvgBlockFuga.x), 0.5);
-  fprintf(SystemComponents.OUTPUT, "=========================AVERAGE========================\n");
-  fprintf(SystemComponents.OUTPUT, "Averaged Rosenbluth Weight: %.10f +/- %.10f\n", AvgBlockRosen.x, RosenError);
-  fprintf(SystemComponents.OUTPUT, "Averaged Excess Chemical Potential: %.10f +/- %.10f\n", AvgBlockMu.x, MuError);
-  fprintf(SystemComponents.OUTPUT, "Averaged Henry Coefficient [mol/kg/Pa]: %.10g +/- %.10g\n", AvgBlockHenry.x, HenryError);
-  fprintf(SystemComponents.OUTPUT, "Averaged Fugacity: %.10f +/- %.10f\n", AvgBlockFuga.x, FugaError);
 }
 
 static inline void Print_Swap_Statistics(Move_Statistics MoveStats, FILE* OUTPUT)
@@ -469,11 +474,11 @@ static inline void Print_HeatOfAdsorption(Components& SystemComponents, int Cycl
         //if(SystemComponents.NComponents.x - SystemComponents.NComponents.y > 1) 
         One_Over_Variance = matrix[adjust_compj][adjust_compi]; //Inversed matrix, multiple components
 
-        // Calculate heat of adsorption [kJ/mol]
         HeatOfAdsorption[adjust_compi][i] += ( Constants.energy_to_kelvin * (Average_ExN - Average_E * Average_N) * One_Over_Variance);
       }
       double kelvin_to_kjmol = 0.01 / Constants.energy_to_kelvin;
       HeatOfAdsorption[adjust_compi][i] -= Temperature; 
+      // Calculate heat of adsorption [kJ/mol]
       HeatOfAdsorption[adjust_compi][i] *= kelvin_to_kjmol;
     }
   }
@@ -576,11 +581,11 @@ static inline void Print_Averages(Components& SystemComponents, int Cycles, int 
   fprintf(SystemComponents.OUTPUT, "==============================================================\n");
 }
 
-static inline void Gather_Averages_Types(std::vector<double2>& Array, double init_value, double running_value, int Cycles, int Blocksize, size_t Nblock)
+static inline void Gather_Averages_Types(std::vector<double2>& Array, double init_value, double running_value, size_t blockID)
 {
   //Determine the block id//
-  size_t blockID = Cycles/Blocksize;
-  if(blockID >= Nblock) blockID --;
+  //size_t blockID = Cycles/Blocksize;
+  //if(blockID >= Nblock) blockID --;
   //Get total energy//
   double total_value = init_value + running_value;
   Array[blockID].x += total_value;
@@ -589,11 +594,11 @@ static inline void Gather_Averages_Types(std::vector<double2>& Array, double ini
 
 // Kaihang Shi: Added for the purpose of heat of adsorption
 // Just to keep the average, not SQAverage
-static inline void Gather_Averages_double(std::vector<double>& Array, double value, int Cycles, int Blocksize, size_t Nblock)
+static inline void Gather_Averages_double(std::vector<double>& Array, double value, size_t blockID)
 {
   //Determine the block id//
-  size_t blockID = Cycles/Blocksize;
-  if(blockID >= Nblock) blockID --;
+  //size_t blockID = Cycles/Blocksize;
+  //if(blockID >= Nblock) blockID --;
   Array[blockID] += value;
 }
 

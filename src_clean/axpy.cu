@@ -415,29 +415,30 @@ void GatherStatisticsDuringSimulation(Variables& Vars, size_t systemId, size_t c
     //Record values for Number of atoms//
     for(size_t comp = 0; comp < SystemComponents.NComponents.x; comp++)
     {
-      Gather_Averages_Types(SystemComponents.Moves[comp].MolAverage, SystemComponents.NumberOfMolecule_for_Component[comp], 0.0, i, BlockAverageSize, SystemComponents.Nblock);
+      SystemComponents.Moves[comp].DetermineBlockID(i, BlockAverageSize, SystemComponents.Nblock);
+      Gather_Averages_Types(SystemComponents.Moves[comp].MolAverage, SystemComponents.NumberOfMolecule_for_Component[comp], 0.0, SystemComponents.Moves[comp].BlockID);
       //Gather total energy * number of molecules for each adsorbate component//
       if(comp >= SystemComponents.NComponents.y)
       {
         double deltaE_Adsorbate = SystemComponents.deltaE.total() - SystemComponents.deltaE.HHVDW - SystemComponents.deltaE.HHEwaldE - SystemComponents.deltaE.HHReal;
         double ExN = SystemComponents.createmol_energy + deltaE_Adsorbate * SystemComponents.NumberOfMolecule_for_Component[comp];
-        Gather_Averages_double(SystemComponents.EnergyTimesNumberOfMolecule[comp], ExN, i, BlockAverageSize, SystemComponents.Nblock);
+        Gather_Averages_double(SystemComponents.EnergyTimesNumberOfMolecule[comp], ExN, SystemComponents.Moves[comp].BlockID);
         //Calculate Average Excess Loading//
         //AmountOfExcessMolecules only be resized during EOS calculation, don't have that? then no excess loading because excess loading needs compressibility from EOS//
         if(SystemComponents.AmountOfExcessMolecules.size() > 0)
-          Gather_Averages_Types(SystemComponents.ExcessLoading[comp], SystemComponents.NumberOfMolecule_for_Component[comp] - SystemComponents.AmountOfExcessMolecules[comp], 0.0, i, BlockAverageSize, SystemComponents.Nblock);
+          Gather_Averages_Types(SystemComponents.ExcessLoading[comp], SystemComponents.NumberOfMolecule_for_Component[comp] - SystemComponents.AmountOfExcessMolecules[comp], 0.0, SystemComponents.Moves[comp].BlockID);
       }
       for(size_t compj = 0; compj < SystemComponents.NComponents.x; compj++)
       {
         if(comp >= SystemComponents.NComponents.y && compj >= SystemComponents.NComponents.y)
         {
           double NxNj = SystemComponents.NumberOfMolecule_for_Component[comp] * SystemComponents.NumberOfMolecule_for_Component[compj];
-          Gather_Averages_double(SystemComponents.Moves[comp].MolSQPerComponent[compj], NxNj, i, BlockAverageSize, SystemComponents.Nblock);
-          Gather_Averages_Types(SystemComponents.DensityPerComponent[comp], SystemComponents.NumberOfMolecule_for_Component[comp] / Sims.Box.Volume, 0.0, i, BlockAverageSize, SystemComponents.Nblock);
+          Gather_Averages_double(SystemComponents.Moves[comp].MolSQPerComponent[compj], NxNj, SystemComponents.Moves[comp].BlockID);
+          Gather_Averages_Types(SystemComponents.DensityPerComponent[comp], SystemComponents.NumberOfMolecule_for_Component[comp] / Sims.Box.Volume, 0.0, SystemComponents.Moves[comp].BlockID);
         }
       }
     }
-    Gather_Averages_Types(SystemComponents.VolumeAverage, Sims.Box.Volume, 0.0, i, BlockAverageSize, SystemComponents.Nblock);
+    Gather_Averages_Types(SystemComponents.VolumeAverage, Sims.Box.Volume, 0.0, SystemComponents.Moves[0].BlockID);
     Gather_Averages_MoveEnergy(SystemComponents, i, BlockAverageSize, SystemComponents.deltaE);
   }
   if(SimulationMode != INITIALIZATION && i > 0)
@@ -551,7 +552,10 @@ inline void MCEndOfPhaseSummary(Variables& Vars)
       if(Vars.SimulationMode == EQUILIBRATION) fprintf(SystemComponents[sim].OUTPUT, "Sampled %zu WangLandau, Adjusted WL %zu times\n", SystemComponents[sim].WLSampled, SystemComponents[sim].WLAdjusted);
       PrintAllStatistics(SystemComponents[sim], Sims[sim], Cycles, Vars.SimulationMode, Vars.BlockAverageSize, Constants);
       if(Vars.SimulationMode == PRODUCTION)
+      {
         Calculate_Overall_Averages_MoveEnergy(SystemComponents[sim], Vars.BlockAverageSize, Cycles);
+        Print_Widom_Statistics(SystemComponents[sim], Vars.Sims[sim].Box, Constants);
+      }
     }
     PrintSystemMoves(Vars);
   }

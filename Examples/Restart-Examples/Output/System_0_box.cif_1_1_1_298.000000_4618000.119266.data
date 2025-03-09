@@ -1,0 +1,174 @@
+Parsing [1] Component
+-------------- READING Component 0 (TIP4P)--------------
+=============MC MOVE PROBABILITIES=================
+ACCUMULATED Probabilities:
+Translation Probability:      0.25
+Rotation Probability:         0.5
+Special Rotation Probability: 0.5
+Widom Probability:            0.5
+Reinsertion Probability:      0.75
+Identity Swap Probability:    0.75
+CBCF Swap Probability:        0.75
+Swap Probability:             1
+Volume Probability:           1
+Gibbs Swap Probability:       1
+Gibbs Volume Probability:     1
+Sum of Probabilities:         1
+==================================================
+-------------- END OF READING Component 0 (TIP4P)--------------
+================FUGACITY COEFFICIENT CALCULATION================
+Checking: Current Fugacity Coeff for 1 component: 1.00000
+Every Adsorbate Component has fugacity coefficient assigned, skip EOS calculation!
+Rosen capacity: 10
+----------------- MEMORY ALLOCAION STATUS -----------------
+System allocate_sizes are: 0, 10240
+Component allocate_sizes are: 0, 10240
+Allocated 8 double3 for reinsertion!
+Allocated Blocksum size: 24001, vdw_real size: 24001, fourier_size: 0
+------------------------------------------------------------
+------------------- SIMULATION BOX PARAMETERS -----------------
+Pressure:        0.27810
+Box Volume:      16777.21600
+Box Beta:        0.00404
+Box Temperature: 298.00000
+---------------------------------------------------------------
+======================== CALCULATING INITIAL STAGE ENERGY ========================
+****** Calculating VDW + Real Energy (CPU) ******
+Host-Host   VDW: 0.00000; Real: 0.00000
+Host-Guest  VDW: 0.00000; Real: 0.00000
+Guest-Guest VDW: 115396.99098; Real: -1244709.72826
+********** PRINTING COMPONENT ENERGIES**********
+Compoent [0-0], VDW: 0.00000, Real: 0.00000
+Compoent [0-1], VDW: 0.00000, Real: 0.00000
+Compoent [1-1], VDW: 115396.99098, Real: -1244709.72826
+****** Calculating Ewald Energy (CPU) ******
+CPU Guest-Guest Fourier: 13848.41298, Host-Host Fourier: 0.00000, Framework-Guest Fourier: 0.00000
+Component: 0, SelfAtomE: 0.00000 (0.00000 K)
+Component: 1, SelfAtomE: 15059438.06105 (18112351.86996 K)
+Component: 0, Intra-Molecular ExclusionE: 0.00000 (0.00000 K)
+Component: 1, Intra-Molecular ExclusionE: 14976141.88732 (18012169.53899 K)
+HostEwald took 0.02012 sec
+Ewald Summation (total energy) on the CPU took 0.02012 secs
+DEBUG: comp: 0, IntraE: 0.00000, SelfE: 0.00000
+Component 1, Intra Exclusion Energy: -31330.84077 (-37682.36305 K)
+Component 1, Atom Self Exclusion Energy: 31505.10055 (37891.94952 K)
+DEBUG: comp: 1, IntraE: -31330.84077, SelfE: 31505.10055
+******   Allocating Ewald WaveVectors + StructureFactors (INITIAL STAGE ONLY)   ******
+Allocated 30592 30592 30592 space for eikxyz
+Structure Factor 0 is 0.00000 0.00000
+Structure Factor 1 is 0.00000 0.00000
+Structure Factor 2 is 0.00000 0.00000
+Structure Factor 3 is 0.00000 0.00000
+Structure Factor 4 is 0.00000 0.00000
+Structure Factor 5 is 11.07554 -4.40671
+Structure Factor 6 is -3.07544 6.03871
+Structure Factor 7 is 7.45485 -1.63878
+Structure Factor 8 is 2.79749 -8.30132
+Structure Factor 9 is -1.36669 5.28235
+****** DONE Allocating Ewald WaveVectors + StructureFactors(INITIAL STAGE ONLY) ******
+ ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
+CPU SF: 1800, GPU SF: 1800
+StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 1, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 2, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 3, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 4, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 5, CPU: 11.07554 -4.40671, GPU: 11.07554 -4.40671
+StructureFactor 6, CPU: -3.07544 6.03871, GPU: -3.07544 6.03871
+StructureFactor 7, CPU: 7.45485 -1.63878, GPU: 7.45485 -1.63878
+StructureFactor 8, CPU: 2.79749 -8.30132, GPU: 2.79749 -8.30132
+StructureFactor 9, CPU: -1.36669 5.28235, GPU: -1.36669 5.28235
+ ****** CHECKING Framework StructureFactors Stored on CPU ****** 
+Framework Structure Factor 0, real: 0.00000 imag: 0.00000
+Framework Structure Factor 1, real: 0.00000 imag: 0.00000
+Framework Structure Factor 2, real: 0.00000 imag: 0.00000
+Framework Structure Factor 3, real: 0.00000 imag: 0.00000
+Framework Structure Factor 4, real: 0.00000 imag: 0.00000
+Framework Structure Factor 5, real: 0.00000 imag: 0.00000
+Framework Structure Factor 6, real: 0.00000 imag: 0.00000
+Framework Structure Factor 7, real: 0.00000 imag: 0.00000
+Framework Structure Factor 8, real: 0.00000 imag: 0.00000
+Framework Structure Factor 9, real: 0.00000 imag: 0.00000
+VDW + Real on the GPU took 0.00107 secs
+Ewald Summation (total energy) on the GPU took 0.00059 secs
+Total GPU Energy: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 115396.99098312214
+HHReal: 0
+HGReal: 0
+GGReal: -1244709.7282550195
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -69447.76075152065
+TailE: 0
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+====================== DONE CALCULATING INITIAL STAGE ENERGY ======================
+Component 1, Need to create 0 full molecule
+======================== CALCULATING CREATE_MOLECULE STAGE ENERGY ========================
+****** Calculating VDW + Real Energy (CPU) ******
+Host-Host   VDW: 0.00000; Real: 0.00000
+Host-Guest  VDW: 0.00000; Real: 0.00000
+Guest-Guest VDW: 115396.99098; Real: -1244709.72826
+********** PRINTING COMPONENT ENERGIES**********
+Compoent [0-0], VDW: 0.00000, Real: 0.00000
+Compoent [0-1], VDW: 0.00000, Real: 0.00000
+Compoent [1-1], VDW: 115396.99098, Real: -1244709.72826
+****** Calculating Ewald Energy (CPU) ******
+CPU Guest-Guest Fourier: 13848.41298, Host-Host Fourier: 0.00000, Framework-Guest Fourier: 0.00000
+Component: 0, SelfAtomE: 0.00000 (0.00000 K)
+Component: 1, SelfAtomE: 15059438.06105 (18112351.86996 K)
+Component: 0, Intra-Molecular ExclusionE: 0.00000 (0.00000 K)
+Component: 1, Intra-Molecular ExclusionE: 14976141.88732 (18012169.53899 K)
+HostEwald took 0.01984 sec
+Ewald Summation (total energy) on the CPU took 0.01984 secs
+ ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
+CPU SF: 1800, GPU SF: 1800
+StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 1, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 2, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 3, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 4, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 5, CPU: 11.07554 -4.40671, GPU: 11.07554 -4.40671
+StructureFactor 6, CPU: -3.07544 6.03871, GPU: -3.07544 6.03871
+StructureFactor 7, CPU: 7.45485 -1.63878, GPU: 7.45485 -1.63878
+StructureFactor 8, CPU: 2.79749 -8.30132, GPU: 2.79749 -8.30132
+StructureFactor 9, CPU: -1.36669 5.28235, GPU: -1.36669 5.28235
+ ****** CHECKING Framework StructureFactors Stored on CPU ****** 
+Framework Structure Factor 0, real: 0.00000 imag: 0.00000
+Framework Structure Factor 1, real: 0.00000 imag: 0.00000
+Framework Structure Factor 2, real: 0.00000 imag: 0.00000
+Framework Structure Factor 3, real: 0.00000 imag: 0.00000
+Framework Structure Factor 4, real: 0.00000 imag: 0.00000
+Framework Structure Factor 5, real: 0.00000 imag: 0.00000
+Framework Structure Factor 6, real: 0.00000 imag: 0.00000
+Framework Structure Factor 7, real: 0.00000 imag: 0.00000
+Framework Structure Factor 8, real: 0.00000 imag: 0.00000
+Framework Structure Factor 9, real: 0.00000 imag: 0.00000
+VDW + Real on the GPU took 0.00101 secs
+Ewald Summation (total energy) on the GPU took 0.00057 secs
+Total GPU Energy: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 115396.99098312214
+HHReal: 0
+HGReal: 0
+GGReal: -1244709.7282550195
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -69447.76075152065
+TailE: 0
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+====================== DONE CALCULATING CREATE_MOLECULE STAGE ENERGY ======================
+============================================
+== END OF PREPARATION, SIMULATION STARTS! ==
+============================================
+Running Simulation Boxes in SERIAL, currently [0] box; pres: 4618000.11927 [Pa], temp: 298.0

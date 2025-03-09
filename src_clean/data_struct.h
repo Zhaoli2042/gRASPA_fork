@@ -564,6 +564,12 @@ struct Move_Statistics
     
     return STR;
   }
+  void DetermineBlockID(size_t Cycles, size_t Blocksize, size_t Nblock)
+  {
+    //Determine the block id//
+    BlockID = Cycles/Blocksize;
+    if(BlockID >= Nblock) BlockID --;
+  }
   void RecordRosen(double R, int MoveType)
   {
     if(MoveType != INSERTION && MoveType != DELETION && MoveType != WIDOM) return;

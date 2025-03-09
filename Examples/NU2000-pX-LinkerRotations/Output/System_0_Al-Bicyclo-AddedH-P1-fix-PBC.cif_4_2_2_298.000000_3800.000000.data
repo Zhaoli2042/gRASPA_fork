@@ -61,22 +61,22 @@ Compoent [1-2], VDW: 0.00000, Real: 0.00000
 Compoent [2-2], VDW: 0.00000, Real: 0.00000
 ****** Calculating Ewald Energy (CPU) ******
 CPU Guest-Guest Fourier: 0.00000, Host-Host Fourier: 7328.67519, Framework-Guest Fourier: 0.00000
-Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 kJ/mol)
-Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 kJ/mol)
-Component: 2, SelfAtomE: 0.00000 (0.00000 kJ/mol)
-Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 kJ/mol)
-Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 kJ/mol)
-Component: 2, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
-HostEwald took 0.05832 sec
-Ewald Summation (total energy) on the CPU took 0.05832 secs
-Component 0, Intra Exclusion Energy: 32892160.48297 (39560200.18912 kJ/mol)
-Component 0, Atom Self Exclusion Energy: 7123268.40575 (8567327.89803 kJ/mol)
+Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 K)
+Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 K)
+Component: 2, SelfAtomE: 0.00000 (0.00000 K)
+Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 K)
+Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 K)
+Component: 2, Intra-Molecular ExclusionE: 0.00000 (0.00000 K)
+HostEwald took 0.05773 sec
+Ewald Summation (total energy) on the CPU took 0.05773 secs
+Component 0, Intra Exclusion Energy: 32892160.48297 (39560200.18912 K)
+Component 0, Atom Self Exclusion Energy: 7123268.40575 (8567327.89803 K)
 DEBUG: comp: 0, IntraE: 32892160.48297, SelfE: 7123268.40575
-Component 1, Intra Exclusion Energy: 3807.36571 (4579.21120 kJ/mol)
-Component 1, Atom Self Exclusion Energy: 23123.22839 (27810.86833 kJ/mol)
+Component 1, Intra Exclusion Energy: 3807.36571 (4579.21120 K)
+Component 1, Atom Self Exclusion Energy: 23123.22839 (27810.86833 K)
 DEBUG: comp: 1, IntraE: 3807.36571, SelfE: 23123.22839
-Component 2, Intra Exclusion Energy: -3038.44649 (-3654.41338 kJ/mol)
-Component 2, Atom Self Exclusion Energy: 3297.28572 (3965.72560 kJ/mol)
+Component 2, Intra Exclusion Energy: -3038.44649 (-3654.41338 K)
+Component 2, Atom Self Exclusion Energy: 3297.28572 (3965.72560 K)
 DEBUG: comp: 2, IntraE: -3038.44649, SelfE: 3297.28572
 ******   Allocating Ewald WaveVectors + StructureFactors (INITIAL STAGE ONLY)   ******
 Allocated 29696 29696 37120 space for eikxyz
@@ -114,8 +114,8 @@ Framework Structure Factor 6, real: 0.00000 imag: -0.00000
 Framework Structure Factor 7, real: -0.00000 imag: 0.00000
 Framework Structure Factor 8, real: 0.00000 imag: -0.00000
 Framework Structure Factor 9, real: -0.00000 imag: 0.00000
-VDW + Real on the GPU took 0.00051 secs
-Ewald Summation (total energy) on the GPU took 0.00097 secs
+VDW + Real on the GPU took 0.00063 secs
+Ewald Summation (total energy) on the GPU took 0.00105 secs
 Total GPU Energy: MoveEnergy Decomposition Summary: 
 HHVDW: 5523439918.42259
 HGVDW: 0
@@ -148,14 +148,14 @@ Compoent [1-2], VDW: 0.00000, Real: 0.00000
 Compoent [2-2], VDW: 0.00000, Real: 0.00000
 ****** Calculating Ewald Energy (CPU) ******
 CPU Guest-Guest Fourier: 0.00000, Host-Host Fourier: 7328.67519, Framework-Guest Fourier: 0.00000
-Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 kJ/mol)
-Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 kJ/mol)
-Component: 2, SelfAtomE: 0.00000 (0.00000 kJ/mol)
-Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 kJ/mol)
-Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 kJ/mol)
-Component: 2, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
-HostEwald took 0.05808 sec
-Ewald Summation (total energy) on the CPU took 0.05808 secs
+Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 K)
+Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 K)
+Component: 2, SelfAtomE: 0.00000 (0.00000 K)
+Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 K)
+Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 K)
+Component: 2, Intra-Molecular ExclusionE: 0.00000 (0.00000 K)
+HostEwald took 0.05740 sec
+Ewald Summation (total energy) on the CPU took 0.05740 secs
  ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
 CPU SF: 2280, GPU SF: 2280
 StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
@@ -179,8 +179,8 @@ Framework Structure Factor 6, real: 0.00000 imag: -0.00000
 Framework Structure Factor 7, real: -0.00000 imag: 0.00000
 Framework Structure Factor 8, real: 0.00000 imag: -0.00000
 Framework Structure Factor 9, real: -0.00000 imag: 0.00000
-VDW + Real on the GPU took 0.00048 secs
-Ewald Summation (total energy) on the GPU took 0.00090 secs
+VDW + Real on the GPU took 0.00052 secs
+Ewald Summation (total energy) on the GPU took 0.00099 secs
 Total GPU Energy: MoveEnergy Decomposition Summary: 
 HHVDW: 5523439918.42259
 HGVDW: 0
@@ -519,6 +519,23 @@ BLOCK [4], Blocksize: 10000, Average: 22290.18313, ErrorBar: 0.03287
 Overall: Average: 22290.18313, ErrorBar: -nan
 ----------------------------------------------------------
 ==============================================================
+=====================Rosenbluth Summary=====================
+There are 5 blocks
+=====BLOCK 0=====
+Widom Performed: 0.0
+=====BLOCK 1=====
+Widom Performed: 0.0
+=====BLOCK 2=====
+Widom Performed: 0.0
+=====BLOCK 3=====
+Widom Performed: 0.0
+=====BLOCK 4=====
+Widom Performed: 0.0
+=========================AVERAGE========================
+Averaged Rosenbluth Weight: 0.0000000000 +/- 0.0000000000
+Averaged Excess Chemical Potential: 0.0000000000 +/- 0.0000000000
+Averaged Henry Coefficient [mol/kg/Pa]: 0 +/- 0
+Averaged Fugacity: 0.0000000000 +/- 0.0000000000
 =====================GIBBS MONTE CARLO STATISTICS=====================
 GIBBS VOLUME MOVE ATTEMPTS: 0
 GIBBS VOLUME MOVE ACCEPTED: 0
@@ -529,7 +546,7 @@ GIBBS PARTICLE TRANSFER MOVE ACCEPTED: 0
 ===============================
 == PRODUCTION PHASE ENDS ==
 ===============================
-Work took 7.572988 seconds
+Work took 7.588906 seconds
 ========================
 == END OF SIMULATION! ==
 ========================
@@ -550,14 +567,14 @@ Compoent [1-2], VDW: -73037.58236, Real: 20884.00700
 Compoent [2-2], VDW: -481.90214, Real: 69.23432
 ****** Calculating Ewald Energy (CPU) ******
 CPU Guest-Guest Fourier: 3092.35211, Host-Host Fourier: 7337.58662, Framework-Guest Fourier: -1915.20753
-Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 kJ/mol)
-Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 kJ/mol)
-Component: 2, SelfAtomE: 39567.42860 (47588.70726 kJ/mol)
-Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 kJ/mol)
-Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 kJ/mol)
-Component: 2, Intra-Molecular ExclusionE: 36461.35784 (43852.96053 kJ/mol)
-HostEwald took 0.05993 sec
-Ewald Summation (total energy) on the CPU took 0.05993 secs
+Component: 0, SelfAtomE: 7123268.40575 (8567327.89803 K)
+Component: 1, SelfAtomE: 1479886.61726 (1779895.57319 K)
+Component: 2, SelfAtomE: 39567.42860 (47588.70726 K)
+Component: 0, Intra-Molecular ExclusionE: -32892160.48297 (-39560200.18912 K)
+Component: 1, Intra-Molecular ExclusionE: -243671.40556 (-293069.51695 K)
+Component: 2, Intra-Molecular ExclusionE: 36461.35784 (43852.96053 K)
+HostEwald took 0.05988 sec
+Ewald Summation (total energy) on the CPU took 0.05988 secs
  ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
 CPU SF: 2280, GPU SF: 2280
 StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
@@ -581,8 +598,8 @@ Framework Structure Factor 6, real: -0.12883 imag: -0.16239
 Framework Structure Factor 7, real: 0.23034 imag: -0.03350
 Framework Structure Factor 8, real: -0.15782 imag: 0.17863
 Framework Structure Factor 9, real: 0.03038 imag: -0.08723
-VDW + Real on the GPU took 0.00082 secs
-Ewald Summation (total energy) on the GPU took 0.00103 secs
+VDW + Real on the GPU took 0.00081 secs
+Ewald Summation (total energy) on the GPU took 0.00102 secs
 Total GPU Energy: MoveEnergy Decomposition Summary: 
 HHVDW: 5523447152.838823
 HGVDW: -94039.33205699429
