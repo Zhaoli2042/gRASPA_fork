@@ -292,7 +292,7 @@ void ComputeFugacity(Components& TempComponents, double Pressure, double Tempera
   {
     excess_volume = TempComponents.ExcessVolume * TempComponents.HeliumVoidFraction;
   }
-  printf("Volume: %.5f, excess_volume: %.5f, Pressure: %.5f\n", Volume, excess_volume, TempComponents.Pressure);
+  fprintf(TempComponents.OUTPUT, "Volume: %.5f, excess_volume: %.5f, Pressure: %.5f\n", Volume, excess_volume, TempComponents.Pressure);
   double MOLAR_GAS_CONSTANT = 8.314464919;         // J mol^-1 K^-1
   double AVOGADRO_CONSTANT  = 6.0221419947e23;     // mol^-1
   TempComponents.Compressibility.resize(TempComponents.NComponents.x, 0.0);

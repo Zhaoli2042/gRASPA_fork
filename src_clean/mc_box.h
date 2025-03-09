@@ -209,7 +209,7 @@ void VolumeMove(Components& SystemComponents, Simulations& Sim, ForceField FF)
   double LengthSQ = pow(std::cbrt(newV), 2);
   if(LengthSQ < 4.0*FF.CutOffVDW || LengthSQ < 4.0*FF.CutOffCoul)
   {
-    printf("Cycle: %zu, Box LengthSQ %.5f (%.5f) < Cutoff\n", SystemComponents.CURRENTCYCLE, LengthSQ, std::sqrt(LengthSQ));
+    fprintf(SystemComponents.OUTPUT, "Cycle: %zu, Box LengthSQ %.5f (%.5f) < Cutoff\n", SystemComponents.CURRENTCYCLE, LengthSQ, std::sqrt(LengthSQ));
   }
 
   MoveEnergy CurrentE;
@@ -310,8 +310,8 @@ void VolumeMove(Components& SystemComponents, Simulations& Sim, ForceField FF)
   /*
   if(SystemComponents.CURRENTCYCLE > 8000)
   { 
-    printf("DeltaE.total: %.5f\n", DeltaE.total());
-    printf("CYCLE: %zu, NEWVolume: %.5f (box 0: %.5f (Old: %.5f), Accept?: %s, Accepted: %zu, RN: %.5f, PAcc: %.5f\n", SystemComponents.CURRENTCYCLE, newV, Sim.Box.Volume, OldV, Accept ? "Accepted" : "Rejected", SystemComponents.VolumeMoveAccepted, RN, PAcc);
+    fprintf(SystemComponents.OUTPUT, "DeltaE.total: %.5f\n", DeltaE.total());
+    fprintf(SystemComponents.OUTPUT, "CYCLE: %zu, NEWVolume: %.5f (box 0: %.5f (Old: %.5f), Accept?: %s, Accepted: %zu, RN: %.5f, PAcc: %.5f\n", SystemComponents.CURRENTCYCLE, newV, Sim.Box.Volume, OldV, Accept ? "Accepted" : "Rejected", SystemComponents.VolumeMoveAccepted, RN, PAcc);
     if(SystemComponents.CURRENTCYCLE == 9906) DeltaE.print();
   }
   */
@@ -345,12 +345,12 @@ void NVTGibbsMove(std::vector<Components>& SystemComponents, Simulations*& Sims,
   
   if(LengthASQ < 4.0*FF.CutOffVDW || LengthASQ < 4.0*FF.CutOffCoul) 
   {
-    printf("Cycle: %zu, Box LengthASQ %.5f (%.5f) < Cutoff\n", SystemComponents[0].CURRENTCYCLE, LengthASQ, std::sqrt(LengthASQ));
+    fprintf(SystemComponents[SelectedBox].OUTPUT, "Cycle: %zu, Box LengthASQ %.5f (%.5f) < Cutoff\n", SystemComponents[0].CURRENTCYCLE, LengthASQ, std::sqrt(LengthASQ));
     return;
   }
   if(LengthBSQ < 4.0*FF.CutOffVDW || LengthBSQ < 4.0*FF.CutOffCoul)
   {
-    printf("Cycle: %zu, Box LengthBSQ %.5f (%.5f) < Cutoff\n", SystemComponents[0].CURRENTCYCLE, LengthBSQ, std::sqrt(LengthBSQ));
+    fprintf(SystemComponents[OtherBox].OUTPUT, "Cycle: %zu, Box LengthBSQ %.5f (%.5f) < Cutoff\n", SystemComponents[0].CURRENTCYCLE, LengthBSQ, std::sqrt(LengthBSQ));
     return;
   }
   bool ScaleFramework = false;

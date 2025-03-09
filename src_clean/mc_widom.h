@@ -44,7 +44,7 @@ inline void Host_sum_Widom_HGGG_SEPARATE(Components& SystemComponents, size_t Nu
     {
       Trialindex.emplace_back(i);
     }
-    //else printf("THERE IS OVERLAP FOR TRIAL %zu, flag = %s\n", i, flag[i] ? "true" : "false");
+    //else fprintf(SystemComponents.OUTPUT, "THERE IS OVERLAP FOR TRIAL %zu, flag = %s\n", i, flag[i] ? "true" : "false");
   }
 
   size_t Trialsize = Trialindex.size();

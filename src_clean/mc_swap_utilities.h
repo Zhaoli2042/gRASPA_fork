@@ -111,8 +111,8 @@ inline MoveEnergy Deletion_Body(Variables& Vars, size_t systemId, CBMC_Variables
   /*
   if(SystemComponents.CURRENTCYCLE == 28981)
   {
-    printf("DELETION FIRST BEAD ENERGY: "); energy.print();
-    printf("EXCLUSION LIST: %d %d\n", Sims.ExcludeList[0].x, Sims.ExcludeList[0].y);
+    fprintf(SystemComponents.OUTPUT, "DELETION FIRST BEAD ENERGY: "); energy.print();
+    fprintf(SystemComponents.OUTPUT, "EXCLUSION LIST: %d %d\n", Sims.ExcludeList[0].x, Sims.ExcludeList[0].y);
   }
   */
 

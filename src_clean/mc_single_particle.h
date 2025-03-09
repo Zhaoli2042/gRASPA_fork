@@ -145,7 +145,7 @@ inline MoveEnergy SingleBody_Calculation(Variables& Vars, size_t systemId)
     {
       tot.HHVDW += SystemComponents.host_array[i];
       tot.HHReal+= SystemComponents.host_array[i + Total_Nblock];
-      //if(MoveType == SPECIAL_ROTATION) printf("HH Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
+      //if(MoveType == SPECIAL_ROTATION) fprintf(SystemComponents.OUTPUT, "HH Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
     }
     for(size_t i = HH_Nblock; i < HH_Nblock + HG_Nblock; i++) 
     {
@@ -161,9 +161,9 @@ inline MoveEnergy SingleBody_Calculation(Variables& Vars, size_t systemId)
     }
 
     /*
-    printf("HG_NBlock: %zu\n", Total_Nblock);
-    printf("Separated VDW : %.5f (HH), %.5f (HG), %.5f (GG)\n", tot.HHVDW,  tot.HGVDW , tot.GGVDW);
-    printf("Separated Real: %.5f (HH), %.5f (HG), %.5f (GG)\n", tot.HHReal, tot.HGReal, tot.GGReal);
+    fprintf(SystemComponents.OUTPUT, "HG_NBlock: %zu\n", Total_Nblock);
+    fprintf(SystemComponents.OUTPUT, "Separated VDW : %.5f (HH), %.5f (HG), %.5f (GG)\n", tot.HHVDW,  tot.HGVDW , tot.GGVDW);
+    fprintf(SystemComponents.OUTPUT, "Separated Real: %.5f (HH), %.5f (HG), %.5f (GG)\n", tot.HHReal, tot.HGReal, tot.GGReal);
     */
 
     // Calculate Ewald //

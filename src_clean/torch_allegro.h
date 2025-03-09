@@ -210,7 +210,7 @@ struct Allegro
       UCAtoms[comp].pos[update_i]  = HostAtoms.pos[i];
       size_t SymbolIdx = Match_AllegroElement_PseudoAtom_order[HostAtoms.Type[i]];
       UCAtoms[comp].Type[update_i] = SymbolIdx;
-      if(i < 5 || i > (NAtoms - 5)) printf("Component %zu, Atom %zu, xyz %f %f %f, Type %zu, SymbolIndex %zu\n", comp, i, UCAtoms[comp].pos[i].x, UCAtoms[comp].pos[i].y, UCAtoms[comp].pos[i].z, HostAtoms.Type[i], UCAtoms[comp].Type[i]);
+      //if(i < 5 || i > (NAtoms - 5)) printf("Component %zu, Atom %zu, xyz %f %f %f, Type %zu, SymbolIndex %zu\n", comp, i, UCAtoms[comp].pos[i].x, UCAtoms[comp].pos[i].y, UCAtoms[comp].pos[i].z, HostAtoms.Type[i], UCAtoms[comp].Type[i]);
       update_i ++;
     }
   }
@@ -264,7 +264,7 @@ struct Allegro
     std::vector<std::string> termsScannedLined{};
     Split_Tab_Space(termsScannedLined, name);
     ElementSymbolUsed = termsScannedLined;
-    printf("First element of type: %s, first: %s\n", name.c_str(), ElementSymbolUsed[0].c_str());
+    //printf("First element of type: %s, first: %s\n", name.c_str(), ElementSymbolUsed[0].c_str());
     //printf("Model");
     //ReadCutOffFromModel(ModelName);
   }

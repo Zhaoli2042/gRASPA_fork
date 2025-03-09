@@ -81,13 +81,13 @@ static inline MoveEnergy CBCF_LambdaChange(Variables& Vars, size_t systemId, siz
     {
       tot.HHVDW += BlockResult[i];
       tot.HHReal+= BlockResult[i + Total_Nblock];
-      //if(MoveType == SPECIAL_ROTATION) printf("HH Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
+      //if(MoveType == SPECIAL_ROTATION) fprintf(SystemComponents.OUTPUT, "HH Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
     }
     for(size_t i = HH_Nblock; i < HH_Nblock + HG_Nblock; i++)
     {
       tot.HGVDW += BlockResult[i];
       tot.HGReal+= BlockResult[i + Total_Nblock];
-      //if(SystemComponents.CURRENTCYCLE == 25) printf("HG Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
+      //if(SystemComponents.CURRENTCYCLE == 25) fprintf(SystemComponents.OUTPUT, "HG Block %zu, VDW: %.5f, Real: %.5f\n", i, BlockResult[i], BlockResult[i + Total_Nblock]);
     }
     for(size_t i = HH_Nblock + HG_Nblock; i < Total_Nblock; i++)
     {
@@ -443,7 +443,7 @@ static inline MoveEnergy CBCFMove(Variables& Vars, size_t systemId)
       SystemComponents.NumberOfMolecule_for_Component[SelectedComponent] ++;
       SystemComponents.UpdatePseudoAtoms(CBCF_INSERTION,  SelectedComponent);
     }
-    //if(SystemComponents.CURRENTCYCLE == 917) printf("Deletion E: %.5f, Acc: %s\n", energy.total(), Accepted ? "Accept": "Reject");
+    //if(SystemComponents.CURRENTCYCLE == 917) fprintf(SystemComponents.OUTPUT, "Deletion E: %.5f, Acc: %s\n", energy.total(), Accepted ? "Accept": "Reject");
   }
   else //Lambda Move//
   {

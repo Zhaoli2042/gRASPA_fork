@@ -8,6 +8,8 @@
 #include <random>
 #include <optional>
 
+#include <format>
+
 //#include "axpy.h"
 //###PATCH_LCLIN_DATA_STRUCT_H###//
 
@@ -525,7 +527,7 @@ struct Move_Statistics
   }
   void PrintProbabilities()
   {
-    printf("==================================================\n");
+    printf("=============MC MOVE PROBABILITIES=================\n");
     printf("ACCUMULATED Probabilities:\n");
     printf("Translation Probability:      %.5f\n", TranslationProb);
     printf("Rotation Probability:         %.5f\n", RotationProb);
@@ -540,6 +542,27 @@ struct Move_Statistics
     printf("Gibbs Volume Probability:     %.5f\n", GibbsVolumeMoveProb);
     printf("Sum of Probabilities:         %.5f\n", TotalProb);
     printf("==================================================\n");
+  }
+  std::string PrintProbabilities_ToString()
+  {
+    std::string STR;
+    STR += "=============MC MOVE PROBABILITIES=================\n";
+    STR += "ACCUMULATED Probabilities:\n";
+    STR += std::format("Translation Probability:      {}\n", TranslationProb);
+    STR += std::format("Rotation Probability:         {}\n", RotationProb);
+    STR += std::format("Special Rotation Probability: {}\n", SpecialRotationProb);
+    STR += std::format("Widom Probability:            {}\n", WidomProb);
+    STR += std::format("Reinsertion Probability:      {}\n", ReinsertionProb);
+    STR += std::format("Identity Swap Probability:    {}\n", IdentitySwapProb);
+    STR += std::format("CBCF Swap Probability:        {}\n", CBCFProb);
+    STR += std::format("Swap Probability:             {}\n", SwapProb);
+    STR += std::format("Volume Probability:           {}\n", VolumeMoveProb);
+    STR += std::format("Gibbs Swap Probability:       {}\n", GibbsSwapProb);
+    STR += std::format("Gibbs Volume Probability:     {}\n", GibbsVolumeMoveProb);
+    STR += std::format("Sum of Probabilities:         {}\n", TotalProb);
+    STR += "==================================================\n";
+    
+    return STR;
   }
   void RecordRosen(double R, int MoveType)
   {
@@ -700,6 +723,31 @@ struct MoveEnergy
     printf("HHVDW: %.5f, HHReal: %.5f, HGVDW: %.5f, HGReal: %.5f, GGVDW: %.5f, GGReal: %.5f, HHEwaldE: %.5f,\n HGEwaldE: %.5f,\n GGEwaldE: %.5f, TailE: %.5f, DNN_E: %.5f\n", HHVDW, HHReal, HGVDW, HGReal, GGVDW, GGReal, HHEwaldE, HGEwaldE, GGEwaldE, TailE, DNN_E);
     printf("Stored HGVDW: %.5f, Stored HGReal: %.5f, Stored HGEwaldE: %.5f\n", storedHGVDW, storedHGReal, storedHGEwaldE);
   };
+  std::string print_to_string()
+  {
+    std::string STR = "MoveEnergy Decomposition Summary: \n";
+    STR += std::format("HHVDW: {}\n", HHVDW);
+    STR += std::format("HGVDW: {}\n", HGVDW);
+    STR += std::format("GGVDW: {}\n", GGVDW);
+
+    STR += std::format("HHReal: {}\n", HHReal);
+    STR += std::format("HGReal: {}\n", HGReal);
+    STR += std::format("GGReal: {}\n", GGReal);
+
+    STR += std::format("HHEwaldE: {}\n", HHEwaldE);
+    STR += std::format("HGEwaldE: {}\n", HGEwaldE);
+    STR += std::format("GGEwaldE: {}\n", GGEwaldE);
+   
+    STR += std::format("TailE: {}\n", TailE);
+    STR += std::format("DNN_E: {}\n", DNN_E);
+
+    STR += "Stored Energies (not summed into total energy): \n";
+    STR += std::format("Stored HGVDW:    {}\n", storedHGVDW);
+    STR += std::format("Stored HGReal:   {}\n", storedHGReal);
+    STR += std::format("Stored HGEwaldE: {}\n", storedHGEwaldE);
+
+    return STR;
+  }
   void DNN_Replace_Energy()
   {
     storedHGVDW = HGVDW;
@@ -1395,6 +1443,7 @@ struct Variables
   double RandomNumber;
   double systemId;
 
+  FILE* OverallOUTPUT = stderr;
   //MC_MOVES MOVES;
 };
 

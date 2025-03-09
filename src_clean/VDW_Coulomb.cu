@@ -136,7 +136,7 @@ void VDWReal_Total_CPU(Boxsize Box, Atoms* Host_System, Atoms* System, ForceFiel
               PBC(posvec, Box.Cell, Box.InverseCell, Box.Cubic);
               const double rr_dot = dot(posvec, posvec);
               //printf("i: %zu, j: %zu, rr_dot: %.10f\n", i,j,rr_dot);
-              //if((compi > 0) && (compj > 0)) printf("CHECK_DIST: Compi: %zu Mol[%zu], compj: %zu Mol[%zu], rr_dot: %.5f\n", compi, MoleculeID, compj, MoleculeIDB, rr_dot);
+              //if((compi > 0) && (compj > 0)) fprintf(SystemComponents.OUTPUT, "CHECK_DIST: Compi: %zu Mol[%zu], compj: %zu Mol[%zu], rr_dot: %.5f\n", compi, MoleculeID, compj, MoleculeIDB, rr_dot);
               double result[2] = {0.0, 0.0};
               if(rr_dot < FF.CutOffVDW)
               {
@@ -146,10 +146,10 @@ void VDWReal_Total_CPU(Boxsize Box, Atoms* Host_System, Atoms* System, ForceFiel
                 const double FFarg[4] = {FF.epsilon[row], FF.sigma[row], FF.z[row], FF.shift[row]};
                 VDW(FFarg, rr_dot, scaling, result);
                 Total_VDW[InteractionType] += 0.5*result[0];
-                //if((compi > 0) && (compj > 0)) printf("Compi: %zu Mol[%zu], compj: %zu Mol[%zu], GG_E: %.5f\n", compi, MoleculeID, compj, MoleculeIDB, result[0]);
+                //if((compi > 0) && (compj > 0)) fprintf(SystemComponents.OUTPUT, "Compi: %zu Mol[%zu], compj: %zu Mol[%zu], GG_E: %.5f\n", compi, MoleculeID, compj, MoleculeIDB, result[0]);
                 VDW_energy   += 0.5*result[0];
                 ComponentEnergy[compi * SystemComponents.NComponents.x + compj].x += 0.5*result[0];
-                //if(std::abs(result[0]) > 10000) printf("Very High Energy (VDW), comps: %zu, %zu, MolID: %zu %zu, Atom: %zu %zu, E: %.5f\n", compi, compj, MoleculeID, MoleculeIDB, i, j, result[0]);
+                //if(std::abs(result[0]) > 10000) fprintf(SystemComponents.OUTPUT, "Very High Energy (VDW), comps: %zu, %zu, MolID: %zu %zu, Atom: %zu %zu, E: %.5f\n", compi, compj, MoleculeID, MoleculeIDB, i, j, result[0]);
                 //DEBUG//
                 if(MoleculeID == selectedMol && (compi == selectedComp)) 
                 {
@@ -181,7 +181,7 @@ void VDWReal_Total_CPU(Boxsize Box, Atoms* Host_System, Atoms* System, ForceFiel
                 Total_Real[InteractionType] += 0.5*resultCoul[0];
                 Coul_energy  += 0.5*resultCoul[0];
                 ComponentEnergy[compi * SystemComponents.NComponents.x + compj].y += 0.5*resultCoul[0];
-                //if(std::abs(result[0]) > 10000) printf("Very High Energy (Coul), comps: %zu, %zu, MolID: %zu %zu, Atom: %zu %zu, E: %.5f\n", compi, compj, MoleculeID, MoleculeIDB, i, j, resultCoul[0]);
+                //if(std::abs(result[0]) > 10000) fprintf(SystemComponents.OUTPUT, "Very High Energy (Coul), comps: %zu, %zu, MolID: %zu %zu, Atom: %zu %zu, E: %.5f\n", compi, compj, MoleculeID, MoleculeIDB, i, j, resultCoul[0]);
                 //DEBUG//
                 if(MoleculeID == selectedMol && (compi == selectedComp))
                 {
@@ -283,7 +283,7 @@ __global__ void one_thread_GPU_test(Boxsize Box, Atoms* System, ForceField FF, d
                   else {temp_chain += result[0];}
                 } 
               }}
-              //  printf("SPECIEL CHECK: compi: %lu, i: %lu, compj: %lu, j: %lu, pos: %.5f, %.5f, %.5f, rr_dot: %.10f, energy: %.10f\n", compi,i,compj,j,Component.pos[i].x, Component.pos[i].y, Component.pos[i].z, rr_dot, result[0]);
+              //  fprintf(SystemComponents.OUTPUT, "SPECIEL CHECK: compi: %lu, i: %lu, compj: %lu, j: %lu, pos: %.5f, %.5f, %.5f, rr_dot: %.10f, energy: %.10f\n", compi,i,compj,j,Component.pos[i].x, Component.pos[i].y, Component.pos[i].z, rr_dot, result[0]);
               if (!FF.noCharges && rr_dot < FF.CutOffCoul)
               {
                 const double r = sqrt(rr_dot);
@@ -1624,7 +1624,7 @@ MoveEnergy Total_VDW_Coulomb_Energy(Simulations& Sim, Components& SystemComponen
 
   if(Nblock*2 > Sim.Nblocks)
   {
-    printf("More blocks for block sum is needed\n");
+    fprintf(SystemComponents.OUTPUT, "More blocks for block sum is needed\n");
     cudaMalloc(&Sim.Blocksum, 2*Nblock * sizeof(double));
   }
 

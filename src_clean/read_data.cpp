@@ -93,6 +93,11 @@ void Split_Tab_Space(std::vector<std::string>& termsScannedLined, std::string& s
   termsScannedLined = split(str, ' ');
 }
 
+bool FOUND(std::string& str, const std::string& PATTERN)
+{
+  return (str.find("#") == std::string::npos && str.find(PATTERN, 0) != std::string::npos);
+}
+
 void FindIfInputIsThere(std::string& InputCommand, std::string& exepath)
 {
   bool exist = false;
@@ -158,7 +163,8 @@ void Check_Inputs_In_read_data_cpp(std::string& exepath)
 
     for(size_t i = 0; i < RequiredInputs.size(); i++)
     {
-      if(str.find(RequiredInputs[i], 0) != std::string::npos)
+      //if(str.find(RequiredInputs[i], 0) != std::string::npos)
+      if(FOUND(str, RequiredInputs[i]))
       {
         RequiredInput_Index[i] = counter;
       }
@@ -210,7 +216,8 @@ void read_number_of_sims_from_input(size_t *NumSims, bool *SingleSim)
   while (std::getline(file, str))
   {
     counter++;
-    if (str.find("SingleSimulation", 0) != std::string::npos)
+    //if (str.find("SingleSimulation", 0) != std::string::npos)
+    if (FOUND(str, "SingleSimulation"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -219,7 +226,8 @@ void read_number_of_sims_from_input(size_t *NumSims, bool *SingleSim)
         //printf("running only one simulation\n");
       }
     }
-    if (str.find("NumberOfSimulations", 0) != std::string::npos)
+    //if (str.find("NumberOfSimulations", 0) != std::string::npos)
+    if(FOUND(str, "NumberOfSimulations"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &tempnum);
@@ -248,7 +256,8 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
   while (std::getline(file, str))
   {
     counter++;
-    if (str.find("UseGPUReduction", 0) != std::string::npos)
+    //if (str.find("UseGPUReduction", 0) != std::string::npos)
+    if (FOUND(str, "UseGPUReduction"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -256,7 +265,7 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
         Vars.TempWidom.UseGPUReduction = true;
       }
     }
-    if (str.find("Useflag", 0) != std::string::npos)
+    if (FOUND(str, "Useflag"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -265,66 +274,66 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
       }
     }
   
-    if (str.find("RandomSeed", 0) != std::string::npos)
+    if (FOUND(str, "RandomSeed"))
     {
       Split_Tab_Space(termsScannedLined, str);
       Vars.Random.RANDOMSEED = std::stoi(termsScannedLined[1]);
       //printf("Random Seed is %d\n", Vars.Random.RANDOMSEED);
     }
 
-    if (str.find("AdsorbateAllocateSpace", 0) != std::string::npos)
+    if (FOUND(str, "AdsorbateAllocateSpace"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &Vars.Allocate_space_Adsorbate);
       //printf("Allocate space for adsorbate is %zu\n", Vars.Allocate_space_Adsorbate);
     }
-    if (str.find("NumberOfInitializationCycles", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfInitializationCycles"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%d", &Vars.NumberOfInitializationCycles);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
-    if (str.find("NumberOfEquilibrationCycles", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfEquilibrationCycles"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%d", &Vars.NumberOfEquilibrationCycles);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
-    if (str.find("NumberOfProductionCycles", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfProductionCycles"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%d", &Vars.NumberOfProductionCycles);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
-    if (str.find("NumberOfTrialPositions", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfTrialPositions"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &Vars.TempWidom.NumberWidomTrials);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
-    if (str.find("NumberOfTrialOrientations", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfTrialOrientations"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &Vars.TempWidom.NumberWidomTrialsOrientations);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
     //Zhao's note: Move it somewhere else//
-    if (str.find("NumberOfBlocks", 0) != std::string::npos)
+    if (FOUND(str, "NumberOfBlocks"))
     {
       Split_Tab_Space(termsScannedLined, str);
       ////printf("line is %u, there are %zu Framework Atoms\n", counter, NumberFrameworkAtom);
     }
-    if (str.find("Pressure", 0) != std::string::npos)
+    if (FOUND(str, "Pressure"))
     {
       Split_Tab_Space(termsScannedLined, str);
       Vars.TempComponents.Pressure=std::stod(termsScannedLined[1]);
     }
-    if (str.find("Temperature", 0) != std::string::npos)
+    if (FOUND(str, "Temperature"))
     {
       Split_Tab_Space(termsScannedLined, str);
       Vars.TempComponents.Temperature=std::stod(termsScannedLined[1]);
     }
-    if (str.find("RestartFile", 0) != std::string::npos)
+    if (FOUND(str, "RestartFile"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -333,7 +342,7 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
         //printf("USE CONFIGURATION FROM RESTARTINITIAL FILE\n");
       }
     }
-    if (str.find("DifferentFrameworks", 0) != std::string::npos)
+    if (FOUND(str, "DifferentFrameworks"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -343,13 +352,13 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
     }
     //Check number of adsorbates to process, need to put them in serial order//
     //Component 0, Component 1, ...//
-    if (str.find("Component " + std::to_string(tempNComp), 0) != std::string::npos)
+    if (FOUND(str, "Component " + std::to_string(tempNComp)))
     {
       tempNComp ++;
     }
     //Check if we need to separate framework species
     //species could be cations, linkers, attachments to the nodes, ...//
-    if (str.find("SeparateFrameworkComponents", 0) != std::string::npos)
+    if (FOUND(str, "SeparateFrameworkComponents"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -363,7 +372,7 @@ void read_simulation_input(Variables& Vars, bool *ReadRestart, bool *SameFramewo
     //Zhao's note: make sure there are two spaces before the actual command//
     if(tempSeparateFramework)
     {
-      if(str.find("NumberofFrameworkComponents", 0) != std::string::npos)
+      if (FOUND(str, "NumberofFrameworkComponents"))
       {
         Split_Tab_Space(termsScannedLined, str);
         NComponents.y = std::stoi(termsScannedLined[1]);
@@ -391,7 +400,7 @@ void read_Gibbs_and_Cycle_Stats(Variables& Vars, bool& SetMaxStep, size_t& MaxSt
   while (std::getline(file, str))
   {
     counter++;
-    if (str.find("GibbsVolumeChangeProbability", 0) != std::string::npos)
+    if (FOUND(str, "GibbsVolumeChangeProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       temp=std::stod(termsScannedLined[1]);
@@ -401,7 +410,7 @@ void read_Gibbs_and_Cycle_Stats(Variables& Vars, bool& SetMaxStep, size_t& MaxSt
         Vars.GibbsStatistics.GibbsBoxProb = temp;
       }
     }
-    if (str.find("NPTVolumeChangeProbability", 0) != std::string::npos)
+    if (FOUND(str, "NPTVolumeChangeProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       temp=std::stod(termsScannedLined[1]);
@@ -411,7 +420,7 @@ void read_Gibbs_and_Cycle_Stats(Variables& Vars, bool& SetMaxStep, size_t& MaxSt
         Vars.TempComponents.VolumeMoveProbability = temp;
       }
     }
-    if (str.find("UseMaxStep", 0) != std::string::npos)
+    if (FOUND(str, "UseMaxStep"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -419,14 +428,14 @@ void read_Gibbs_and_Cycle_Stats(Variables& Vars, bool& SetMaxStep, size_t& MaxSt
         SetMaxStep = true;
       }
     }
-    if (str.find("MaxStepPerCycle", 0) != std::string::npos)
+    if (FOUND(str, "MaxStepPerCycle"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &MaxStepPerCycle);
       if(MaxStepPerCycle == 0) throw std::runtime_error("Max Steps per Cycle must be greater than ZERO!");
     }
 
-    if (str.find("StructureFactor_Multiplier", 0) != std::string::npos)
+    if (FOUND(str, "StructureFactor_Multiplier"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &Vars.StructureFactor_Multiplier);
@@ -436,11 +445,11 @@ void read_Gibbs_and_Cycle_Stats(Variables& Vars, bool& SetMaxStep, size_t& MaxSt
   }
   if(SetMaxStep) 
   {
-    printf("Setting Maximum Number of Steps for a Cycle, Max Step = %zu\n", MaxStepPerCycle);
+    fprintf(Vars.OverallOUTPUT, "Setting Maximum Number of Steps for a Cycle, Max Step = %zu\n", MaxStepPerCycle);
   }
   else
   {
-    printf("Running Cycles in the Normal Way\n");
+    fprintf(Vars.OverallOUTPUT, "Running Cycles in the Normal Way\n");
   }
   Vars.GibbsStatistics.GibbsBoxStats  = {0, 0};
   Vars.GibbsStatistics.GibbsXferStats = {0, 0};
@@ -461,7 +470,7 @@ void read_FFParams_from_input(Input_Container& Input)
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("ChargeMethod", 0) != std::string::npos)
+    if (FOUND(str, "ChargeMethod"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "Ewald"))
@@ -470,28 +479,28 @@ void read_FFParams_from_input(Input_Container& Input)
         //printf("USE EWALD SUMMATION FOR CHARGE\n");
       }
     }
-    if (str.find("OverlapCriteria", 0) != std::string::npos)
+    if (FOUND(str, "OverlapCriteria"))
     {
       Split_Tab_Space(termsScannedLined, str);
       tempOverlap = std::stod(termsScannedLined[1]);
     }
-    if (str.find("CutOffVDW", 0) != std::string::npos)
+    if (FOUND(str, "CutOffVDW"))
     {
       Split_Tab_Space(termsScannedLined, str);
       tempvdwcut = std::stod(termsScannedLined[1]);
     }
-    if (str.find("CutOffCoulomb", 0) != std::string::npos)
+    if (FOUND(str, "CutOffCoulomb"))
     {
       Split_Tab_Space(termsScannedLined, str);
       tempcoulcut = std::stod(termsScannedLined[1]);
     }
-    if (str.find("EwaldPrecision", 0) != std::string::npos)
+    if (FOUND(str, "EwaldPrecision"))
     {
       Split_Tab_Space(termsScannedLined, str);
       tempprecision = std::stod(termsScannedLined[1]);
       //tempalpha = (1.35 - 0.15 * log(tempprecision))/tempcoulcut; // Zhao's note: heurestic equation //
     }
-    if (str.find("CBMCBiasingMethod", 0) != std::string::npos)
+    if (FOUND(str, "CBMCBiasingMethod"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "LJ_And_Real_Biasing"))
@@ -503,7 +512,7 @@ void read_FFParams_from_input(Input_Container& Input)
         Input.VDWRealBias = false;
       }
     }
-    if (str.find("Component ", 0) != std::string::npos) //When it reads component, skip//
+    if (FOUND(str, "Component "))
       break;
   }
   //read FF array
@@ -530,17 +539,21 @@ void ReadFrameworkComponentMoves(Move_Statistics& MoveStats, Components& SystemC
 
   std::ifstream file("simulation.input");
 
-  size_t start_counter = 0; bool FOUND = false;
+  size_t start_counter = 0; bool FrameworkComponentFOUND = false;
   std::string start_string = FrameworkComponentName;
   std::string terminate_string="END_OF_" + FrameworkComponentName;
   //first get the line number of the destinated component
   while (std::getline(file, str))
   {
-    if(str.find(start_string, 0) != std::string::npos){FOUND = true; break;}
+    if (FOUND(str, start_string))
+    {
+     FrameworkComponentFOUND = true; 
+     break;
+    }
     start_counter++;
   }
 
-  if(!FOUND)
+  if(!FrameworkComponentFOUND)
   {
     //printf("%s not found in simulation.input\n", FrameworkComponentName.c_str()); 
     return;
@@ -554,36 +567,39 @@ void ReadFrameworkComponentMoves(Move_Statistics& MoveStats, Components& SystemC
   size_t counter = 0;
   while (std::getline(file, str))
   {
-    if(str.find(terminate_string, 0) != std::string::npos){break;}
+    if (FOUND(str, terminate_string))
+    {
+      break;
+    }
     if(counter >= start_counter) //start reading after touching the starting line number
-    if (str.find(FrameworkComponentName, 0) != std::string::npos)
+    if (FOUND(str, FrameworkComponentName))
     {
       Split_Tab_Space(termsScannedLined, str);
       //printf("Found Framework_Component %s in simulation.input file\n", std::to_string(comp).c_str());
     }
-    if (str.find("TranslationProbability", 0) != std::string::npos)
+    if (FOUND(str, "TranslationProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       MoveStats.TranslationProb=std::stod(termsScannedLined[1]);
     }
-    if (str.find("RotationProbability", 0) != std::string::npos)
+    if (FOUND(str, "RotationProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       MoveStats.RotationProb=std::stod(termsScannedLined[1]);
     }
-    if (str.find("RotationSpecialProbability", 0) != std::string::npos)
+    if (FOUND(str, "RotationSpecialProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       MoveStats.SpecialRotationProb=std::stod(termsScannedLined[1]);
       //printf("WARNING: Special Rotations are rotations with pre-set Rotation Axes, Rotation Axes, Angles are needed to define in def files for %s !\n", FrameworkComponentName.c_str());
     }
     //Try to add reinsertion move here//
-    if (str.find("ReinsertionProbability", 0) != std::string::npos)
+    if (FOUND(str, "ReinsertionProbability"))
     {
       Split_Tab_Space(termsScannedLined, str);
       MoveStats.ReinsertionProb=std::stod(termsScannedLined[1]);
     }
-    if (str.find("END_OF_Framework_Component_" + std::to_string(comp), 0) != std::string::npos)
+    if (FOUND(str, "END_OF_Framework_Component_" + std::to_string(comp)))
     {
       //printf("Reach the end of %s\n", FrameworkComponentName.c_str()); 
       break;
@@ -591,7 +607,7 @@ void ReadFrameworkComponentMoves(Move_Statistics& MoveStats, Components& SystemC
     counter ++;
   }
   MoveStats.NormalizeProbabilities();
-  MoveStats.PrintProbabilities();
+  fprintf(SystemComponents.OUTPUT, MoveStats.PrintProbabilities_ToString().c_str());
   file.close();
 }
 
@@ -610,7 +626,7 @@ void read_Ewald_Parameters_from_input(double CutOffCoul, Boxsize& Box, double pr
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("Ewald_UseLAMMPS_Setup", 0) != std::string::npos)
+    if (FOUND(str, "Ewald_UseLAMMPS_Setup"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -628,14 +644,14 @@ void read_Ewald_Parameters_from_input(double CutOffCoul, Boxsize& Box, double pr
     bool kvecFound  = false;
     while (std::getline(file, str))
     {
-      if (str.find("Ewald_Alpha", 0) != std::string::npos)
+      if (FOUND(str, "Ewald_Alpha"))
       {
         Split_Tab_Space(termsScannedLined, str);
         tempalpha=std::stod(termsScannedLined[1]);
         Box.Alpha  = tempalpha;
         AlphaFound = true;
       }
-      if (str.find("Ewald_kvectors", 0) != std::string::npos)
+      if (FOUND(str, "Ewald_kvectors"))
       {
         Split_Tab_Space(termsScannedLined, str);
         //printf("termsScannedLined.size(): %zu\n", termsScannedLined.size());
@@ -1085,6 +1101,40 @@ void Copy_InputLoader_Data(Variables& Vars)
   Vars.TempComponents.TailCorrection    = Vars.Input.Mix_Tail;
 }
 
+void read_debug_mode(Variables& Vars)
+{
+  std::vector<std::string> termsScannedLined{};
+  std::string str;
+  std::ifstream file("simulation.input");
+  bool DebugMode = false;
+
+  while (std::getline(file, str))
+  {
+    if (FOUND(str, "DebugMode"))
+    {
+      Split_Tab_Space(termsScannedLined, str);
+      if(caseInSensStringCompare(termsScannedLined[1], "yes"))
+      {
+        DebugMode = true;
+      }
+    }
+  }
+  if(!DebugMode)
+  {
+    std::filesystem::path cwd = std::filesystem::current_path();
+    std::filesystem::path directoryName = cwd / "Output/";
+    std::filesystem::create_directories(directoryName);
+    std::string OverallFILENAME = directoryName.string() + "MiscOutput.data";
+    Vars.OverallOUTPUT = fopen(OverallFILENAME.c_str(), "w");
+    if(Vars.OverallOUTPUT == nullptr)
+    {
+      throw std::runtime_error("FAIL TO OPEN" + OverallFILENAME + "\n");
+    }
+  }
+  
+  if(Vars.OverallOUTPUT != stderr) printf("Saving Output to File!\n");
+  file.close();
+}
 
 void read_movies_stats_print(Components& SystemComponents, size_t sim)
 {
@@ -1092,46 +1142,48 @@ void read_movies_stats_print(Components& SystemComponents, size_t sim)
   std::string str;
   std::ifstream file("simulation.input");
 
+  bool DebugMode = false;
   while (std::getline(file, str))
   {
-    if (str.find("MoviesEvery", 0) != std::string::npos)
+    if (FOUND(str, "MoviesEvery"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &SystemComponents.MoviesEvery);
     }
-    if (str.find("PrintEvery", 0) != std::string::npos)
+    if (FOUND(str, "PrintEvery"))
     {
       Split_Tab_Space(termsScannedLined, str);
       sscanf(termsScannedLined[1].c_str(), "%zu", &SystemComponents.PrintStatsEvery);
     }
-    if (str.find("SaveOutputToFile", 0) != std::string::npos)
+    if (FOUND(str, "DebugMode"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
       {
-        std::filesystem::path cwd = std::filesystem::current_path();
-        std::filesystem::path directoryName = cwd / "Output/";
-        std::filesystem::create_directories(directoryName);
-        std::string FILENAME = directoryName.string() + "System_"+\
-                               std::to_string(sim) +"_"+\
-                               SystemComponents.MoleculeName[0] +"_"+\
-                               std::to_string(SystemComponents.NumberofUnitCells.x)+"_"+\
-                               std::to_string(SystemComponents.NumberofUnitCells.y)+"_"+\
-                               std::to_string(SystemComponents.NumberofUnitCells.z)+"_"+\
-                               std::to_string(SystemComponents.Temperature) + "_" +\
-                               std::to_string(SystemComponents.Pressure) + ".data";
-
-        SystemComponents.OUTPUT = fopen(FILENAME.c_str(), "w");
-        if(SystemComponents.OUTPUT == nullptr)
-        {
-          throw std::runtime_error("FAIL TO OPEN" + FILENAME + "\n");
-        }
+        DebugMode = true;
       }
     }
   }
-  //printf("Writing Movies every %zu MC step(s) or cycle(s)\n", SystemComponents.MoviesEvery);
-  //printf("Printing Loadings and energies every %zu MC step(s) or cycle(s)\n", SystemComponents.PrintStatsEvery);
-  if(SystemComponents.OUTPUT != stderr) //printf("Saving Output to File!\n");
+  if(!DebugMode)
+  {
+    std::filesystem::path cwd = std::filesystem::current_path();
+    std::filesystem::path directoryName = cwd / "Output/";
+    std::filesystem::create_directories(directoryName);
+    std::string FILENAME = directoryName.string() + "System_"+\
+                           std::to_string(sim) +"_"+\
+                           SystemComponents.MoleculeName[0] +"_"+\
+                           std::to_string(SystemComponents.NumberofUnitCells.x)+"_"+\
+                           std::to_string(SystemComponents.NumberofUnitCells.y)+"_"+\
+                           std::to_string(SystemComponents.NumberofUnitCells.z)+"_"+\
+                           std::to_string(SystemComponents.Temperature) + "_" +\
+                           std::to_string(SystemComponents.Pressure) + ".data";
+    SystemComponents.OUTPUT = fopen(FILENAME.c_str(), "w");
+    if(SystemComponents.OUTPUT == nullptr)
+    {
+      throw std::runtime_error("FAIL TO OPEN" + FILENAME + "\n");
+    }
+  }
+  if(SystemComponents.OUTPUT != stderr) printf("Saving Output to File!\n");
   file.close();
 }
 
@@ -1755,7 +1807,7 @@ void ReadFramework(Boxsize& Box, PseudoAtomDefinitions& PseudoAtom, size_t Frame
   //Check input file for "UseChargeFromCIFFile" keyword//
   while (std::getline(simfile, str))
   {
-    if (str.find("UseChargesFromCIFFile", 0) != std::string::npos)
+    if (FOUND(str, "UseChargesFromCIFFile"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -1770,20 +1822,20 @@ void ReadFramework(Boxsize& Box, PseudoAtomDefinitions& PseudoAtom, size_t Frame
     
   while (std::getline(simfile, str))
   {
-    if (str.find("InputFileType", 0) != std::string::npos)
+    if (FOUND(str, "InputFileType"))
     {
       Split_Tab_Space(termsScannedLined, str);
       InputType=termsScannedLined[1];
     }
     //Zhao's note: When we are using Multiple frameworks, in simulation.input, list the frameworks one by one.//
-    if (str.find("FrameworkName", 0) != std::string::npos) // get the molecule name
+    if (FOUND(str, "FrameworkName"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if((1+FrameworkIndex) >= termsScannedLined.size()) throw std::runtime_error("Not Enough Framework listed in input file...\n");
       Frameworkname = termsScannedLined[1 + FrameworkIndex];
       //printf("Reading Framework %zu, FrameworkName: %s\n", FrameworkIndex, Frameworkname.c_str());
     }
-    if (str.find("UnitCells " + std::to_string(FrameworkIndex), 0) != std::string::npos) // get the molecule name
+    if (FOUND(str, "UnitCells " + std::to_string(FrameworkIndex)))
     {
       Split_Tab_Space(termsScannedLined, str);
       NumberUnitCells.x = std::stod(termsScannedLined[2]);
@@ -2117,7 +2169,10 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
   //first get the line number of the destinated component
   while (std::getline(file, str))
   {
-    if(str.find(start_string, 0) != std::string::npos){break;}
+    if (FOUND(str, start_string)) 
+    {
+      break;
+    }
     start_counter++;
   }
   //printf("%s starts at line number %zu\n", start_string.c_str(), start_counter); 
@@ -2129,70 +2184,70 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
   
   while (std::getline(file, str))
   {
-    if(str.find(terminate_string, 0) != std::string::npos)
+    if (FOUND(str, terminate_string))
     {
-      //printf("Found terminate string [%s]\n", terminate_string.c_str());
+      printf("Found terminate string [%s]\n", terminate_string.c_str());
       break;
     }
     if(counter >= start_counter) //start reading after touching the starting line number
     {
-      if (str.find(start_string, 0) != std::string::npos) // get the molecule name
+      if (FOUND(str, start_string)) // get the molecule name
       {
         Split_Tab_Space(termsScannedLined, str);
         MolName = termsScannedLined[3];
         SystemComponents.MoleculeName.push_back(MolName);
-        std::cout << "-------------- READING Adsorbate" << start_string << " (" << MolName << ")" << " --------------\n";
+        fprintf(SystemComponents.OUTPUT, std::format("-------------- READING {} ({})--------------\n", start_string, MolName).c_str());
         MoleculeDefinitionParser(Mol, SystemComponents, termsScannedLined[3], PseudoAtom, Allocate_space);
       }
-      if (str.find("IdealGasRosenbluthWeight", 0) != std::string::npos)
+      if (FOUND(str, "IdealGasRosenbluthWeight"))
       {
         Split_Tab_Space(termsScannedLined, str);
         idealrosen = std::stod(termsScannedLined[1]); //printf("Ideal Chain Rosenbluth Weight: %.5f\n", idealrosen);
       }
-      if (str.find("TranslationProbability", 0) != std::string::npos)
+      if (FOUND(str, "TranslationProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.TranslationProb=std::stod(termsScannedLined[1]);
-        ////printf("TranslationProb: %.5f, TotalProb: %.5f\n", TranslationProb, TotalProb);
+        printf("TranslationProb: %.5f\n", MoveStats.TranslationProb);
       }
-      if (str.find("RotationProbability", 0) != std::string::npos)
+      if (FOUND(str, "RotationProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.RotationProb=std::stod(termsScannedLined[1]);
-        ////printf("RotationProb: %.5f, TotalProb: %.5f\n", RotationProb, TotalProb);
+        printf("RotationProb: %.5f\n", MoveStats.RotationProb);
       }
-      if (str.find("WidomProbability", 0) != std::string::npos)
+      if (FOUND(str, "WidomProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.WidomProb=std::stod(termsScannedLined[1]);
         ////printf("WidomProb: %.5f, TotalProb: %.5f\n", WidomProb, TotalProb);
       }
-      if (str.find("ReinsertionProbability", 0) != std::string::npos)
+      if (FOUND(str, "ReinsertionProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.ReinsertionProb=std::stod(termsScannedLined[1]);
         ////printf("ReinsertionProb: %.5f, TotalProb: %.5f\n", ReinsertionProb, TotalProb);
       }
-      if (str.find("IdentityChangeProbability", 0) != std::string::npos)
+      if (FOUND(str, "IdentityChangeProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.IdentitySwapProb=std::stod(termsScannedLined[1]);
-        ////printf("IdentityChangeProb: %.5f, TotalProb: %.5f\n", IdentitySwapProb, TotalProb);
+        //printf("IdentityChangeProb: %.5f, TotalProb: %.5f\n", IdentitySwapProb, TotalProb);
       }
-      if (str.find("SwapProbability", 0) != std::string::npos)
+      if (FOUND(str, "SwapProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.SwapProb=std::stod(termsScannedLined[1]);
-        ////printf("SwapProb: %.5f, TotalProb: %.5f\n", SwapProb, TotalProb);
+        //printf("SwapProb: %.5f, TotalProb: %.5f\n", SwapProb, TotalProb);
       }
-      if (str.find("GibbsParticleXferProbability", 0) != std::string::npos)
+      if (FOUND(str, "GibbsParticleXferProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.GibbsSwapProb=std::stod(termsScannedLined[1]);
         ////printf("GibbsParticleXferProbability: %.5f, TotalProb: %.5f\n", MoveStats.GibbsSwapProb, TotalProb);
       }
 
-      if (str.find("CBCFProbability", 0) != std::string::npos)
+      if (FOUND(str, "CBCFProbability"))
       {
         Split_Tab_Space(termsScannedLined, str);
         MoveStats.CBCFProb=std::stod(termsScannedLined[1]);
@@ -2202,7 +2257,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
       //Zhao's note: If using CBCF Move, choose the lambda type//
       if (MoveStats.CBCFProb > 0.0)
       {
-        if (str.find("LambdaType", 0) != std::string::npos)
+        if (FOUND(str, "LambdaType"))
         {
           Split_Tab_Space(termsScannedLined, str);
           if(caseInSensStringCompare(termsScannedLined[1], "ShiMaginn"))
@@ -2215,7 +2270,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
           }
         }
       }
-      if (str.find("FugacityCoefficient", 0) != std::string::npos)
+      if (FOUND(str, "FugacityCoefficient"))
       {
         Split_Tab_Space(termsScannedLined, str);
         if(caseInSensStringCompare(termsScannedLined[1], "PR-EOS"))
@@ -2227,12 +2282,12 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
         else
           throw std::runtime_error("Unrecognized FugacityCoefficient Input: " + termsScannedLined[1] + ", Currently taking 'PR-EOS' or `a float`!!!");
       }
-      if (str.find("MolFraction", 0) != std::string::npos)
+      if (FOUND(str, "MolFraction"))
       {
          Split_Tab_Space(termsScannedLined, str);
          Molfrac = std::stod(termsScannedLined[1]);
       }
-      if (str.find("RunTMMC", 0) != std::string::npos)
+      if (FOUND(str, "RunTMMC"))
       {
         Split_Tab_Space(termsScannedLined, str);
         if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -2241,7 +2296,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
           //printf("TMMC: Running TMMC simulation\n");
         }
       }
-      if (str.find("TURN_OFF_CBMC_SWAP", 0) != std::string::npos)
+      if (FOUND(str, "TURN_OFF_CBMC_SWAP"))
       {
         Split_Tab_Space(termsScannedLined, str);
         if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -2252,17 +2307,17 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
       }
       if(temp_tmmc.DoTMMC)
       {
-        if (str.find("TMMCMin", 0) != std::string::npos)
+        if (FOUND(str, "TMMCMin"))
         {
           Split_Tab_Space(termsScannedLined, str);
           sscanf(termsScannedLined[1].c_str(), "%zu", &temp_tmmc.MinMacrostate);
         }
-        else if (str.find("TMMCMax", 0) != std::string::npos)
+        else if (FOUND(str, "TMMCMax"))
         {
           Split_Tab_Space(termsScannedLined, str);
           sscanf(termsScannedLined[1].c_str(), "%zu", &temp_tmmc.MaxMacrostate);
         }
-        if (str.find("UseBiasOnMacrostate", 0) != std::string::npos)
+        if (FOUND(str, "UseBiasOnMacrostate"))
         {
           Split_Tab_Space(termsScannedLined, str);
           if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -2271,7 +2326,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
             //printf("TMMC: Biasing Insertion/Deletions\n");
           }
         }
-        if (str.find("RestartTMMC", 0) != std::string::npos)
+        if (FOUND(str, "RestartTMMC"))
         {
           Split_Tab_Space(termsScannedLined, str);
           if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -2281,7 +2336,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
             //printf("WARNING: Using TMMCRestart, we thus recommend that you do NOT use Initialization steps, start by Equilibration/Production instead!!!");
           }
         }
-        if (str.find("UpdateTMMCEvery", 0) != std::string::npos)
+        if (FOUND(str, "UpdateTMMCEvery"))
         {
           Split_Tab_Space(termsScannedLined, str);
           sscanf(termsScannedLined[1].c_str(), "%zu", &temp_tmmc.UpdateTMEvery);
@@ -2292,7 +2347,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
       if(SystemComponents.UseDNNforHostGuest)
       {
        //Zhao's note: Read the types of atoms that needs to be considered for the DNN Model//
-        if (str.find("DNNPseudoAtoms", 0) != std::string::npos)
+        if (FOUND(str, "DNNPseudoAtoms"))
         {
           if(AlreadyProcessedMLPseudoAtoms)
             throw std::runtime_error("You are reading ***DNNPseudoAtoms*** twice for one component! This is not allowed. Use only one line!!!!\n");
@@ -2326,7 +2381,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
         }
       }
 
-      if (str.find("CreateNumberOfMolecules", 0) != std::string::npos) // Number of Molecules to create
+      if (FOUND(str, "CreateNumberOfMolecules"))
       {
         Split_Tab_Space(termsScannedLined, str); 
         sscanf(termsScannedLined[1 + BoxIndex].c_str(), "%zu", &CreateMolecule);
@@ -2340,7 +2395,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
   MoveStats.VolumeMoveProb = Vars.TempComponents.VolumeMoveProbability;
 
   MoveStats.NormalizeProbabilities();
-  MoveStats.PrintProbabilities();
+  fprintf(SystemComponents.OUTPUT, MoveStats.PrintProbabilities_ToString().c_str());
 
   //Zhao's note: if monatomic molecule has rotation prob, break the program!//
   size_t currentCompsize = SystemComponents.Moleculesize.size();
@@ -2437,7 +2492,7 @@ void read_component_values_from_simulation_input(Variables& Vars, Components& Sy
   Check_Component_size(SystemComponents);
   //Initialize single values for Mol//
   Mol.size = 0;
-  std::cout << "-------------- END OF READING " << start_string << " (" << MolName << ")" << " --------------\n";
+  fprintf(SystemComponents.OUTPUT, std::format("-------------- END OF READING {} ({})--------------\n", start_string, MolName).c_str());
   file.close();
 }
 
@@ -2492,7 +2547,7 @@ void ReadRestartInputFileType(Components& SystemComponents)
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("RestartInputFileType", 0) != std::string::npos)
+    if (FOUND(str, "RestartInputFileType"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "RASPA"))
@@ -2524,7 +2579,7 @@ static inline size_t ReadLMPDataStartComponent(Components& SystemComponents)
   size_t StartComponent = 0;
   while (std::getline(file, str))
   {
-    if (str.find("LMPData_Comp_to_Start_with", 0) != std::string::npos)
+    if (FOUND(str, "LMPData_Comp_to_Start_with"))
     {
       Split_Tab_Space(termsScannedLined, str);
       int TempComponent = std::stoi(termsScannedLined[1]);
@@ -2534,7 +2589,7 @@ static inline size_t ReadLMPDataStartComponent(Components& SystemComponents)
       }
       StartComponent = static_cast<size_t>(TempComponent);
     }
-    if (str.find("Read_Boxsize", 0) != std::string::npos)
+    if (FOUND(str, "Read_Boxsize"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -2974,12 +3029,12 @@ void ReadVoidFraction(Variables& Vars)
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("HeliumVoidFraction", 0) != std::string::npos)
+    if (FOUND(str, "HeliumVoidFraction"))
     {
       Split_Tab_Space(termsScannedLined, str);
       Vars.TempComponents.HeliumVoidFraction=std::stod(termsScannedLined[1]);
     }
-    if (str.find("ExcessVolume", 0) != std::string::npos)
+    if (FOUND(str, "ExcessVolume"))
     {
       Split_Tab_Space(termsScannedLined, str);
       Vars.TempComponents.ExcessVolume=std::stod(termsScannedLined[1]);
@@ -2995,7 +3050,7 @@ void ReadDNNModelSetup(Components& SystemComponents)
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("UseDNNforHostGuest", 0) != std::string::npos)
+    if (FOUND(str, "UseDNNforHostGuest"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "yes"))
@@ -3014,7 +3069,7 @@ void ReadDNNModelSetup(Components& SystemComponents)
   bool foundMethod = false; bool DNNUnitFound = false;
   while (std::getline(file, str))
   {
-    if (str.find("DNNMethod", 0) != std::string::npos)
+    if (FOUND(str, "DNNMethod"))
     {
       Split_Tab_Space(termsScannedLined, str);
       //printf("Found DNNMethod\n");
@@ -3030,7 +3085,7 @@ void ReadDNNModelSetup(Components& SystemComponents)
       }
       else {throw std::runtime_error("CANNOT IDENTIFY DNN MODEL in simulation.input file");}
     }
-    if (str.find("DNNEnergyUnit", 0) != std::string::npos)
+    if (FOUND(str, "DNNEnergyUnit"))
     {
       Split_Tab_Space(termsScannedLined, str);
       if(caseInSensStringCompare(termsScannedLined[1], "kJ_mol"))

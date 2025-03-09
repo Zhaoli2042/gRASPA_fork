@@ -58,7 +58,7 @@ std::vector<std::vector<double>> CalculatePairDistances_CPU(Atoms* System, Boxsi
       size_t  typeFramework = System[0].Type[i];
       size_t  InteractionIndex = MatchInteractionIndex(DNNInteractionList, typeAdsorbate, typeFramework);
       double3 posvec = System[0].pos[i] - System[ads_comp].pos[j];
-      if(i < 3) printf("adsorbate xyz: %.5f %.5f %.5f\n", System[ads_comp].pos[j].x, System[ads_comp].pos[j].y, System[ads_comp].pos[j].z);
+      //if(i < 3) printf("adsorbate xyz: %.5f %.5f %.5f\n", System[ads_comp].pos[j].x, System[ads_comp].pos[j].y, System[ads_comp].pos[j].z);
       PBC(posvec, Box.Cell, Box.InverseCell, Box.Cubic);
       const double rr_dot = dot(posvec, posvec);
       CPU_Distances[InteractionIndex].push_back(rr_dot);
@@ -134,7 +134,7 @@ void Read_LCLin_Model(Components& SystemComponents)
 
   //Read Min Max//
   SystemComponents.DNNMinMax = ReadMinMax();
-  printf("MinMax size: %zu\n", SystemComponents.DNNMinMax.size());
+  fprintf(SystemComponents.OUTPUT, "MinMax size: %zu\n", SystemComponents.DNNMinMax.size());
 
   //Prepare for the outlier files//
   PrepareOutliersFiles();
@@ -153,7 +153,7 @@ double DNN_Evaluate(Components& SystemComponents, std::vector<double>& Feature)
   double asd = 0.0;
   auto output = SystemComponents.DNNModel[ModelID]({{SystemComponents.InputLayer[ModelID], real_input}},{"StatefulPartitionedCall:0"});
   asd = static_cast<double>(output[0].get_data<double>()[0]);
-  printf("REAL DNN Prediction = %.5f\n", asd);
+  fprintf(SystemComponents.OUTPUT, "REAL DNN Prediction = %.5f\n", asd);
   return asd;
 }
 
@@ -244,7 +244,7 @@ std::vector<std::vector<double>> CalculatePairDistances_GPU(Simulations& Sim, Co
   {
     starts.push_back(start_sum);
     start_sum += SystemComponents.IndexList[i].size();
-    if(SystemComponents.CURRENTCYCLE == 10) printf("number of distances [%zu]: %zu\n", i, SystemComponents.IndexList[i].size());
+    //if(SystemComponents.CURRENTCYCLE == 10) printf("number of distances [%zu]: %zu\n", i, SystemComponents.IndexList[i].size());
   }
 
 
@@ -286,7 +286,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
   //Idea: Write a Kernel to get the distances, write them into pregenerated arrays, then sort using thrust//
   //First Step, count number of pairs for each type of interactions//
   size_t ads_comp = 1; //Zhao's note: Assuming the first component is the adsorbate we are interested in//
-  printf("-------------- Preparing DNN Interaction Types --------------\n");
+  fprintf(SystemComponents.OUTPUT, "-------------- Preparing DNN Interaction Types --------------\n");
   std::vector<size_t>AdsorbateAtomTypesForDNN;
   for(size_t i = 0; i < HostSystem[ads_comp].Molsize; i++)
     if(SystemComponents.ConsiderThisAdsorbateAtom[i])
@@ -294,7 +294,8 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
 
   std::sort(AdsorbateAtomTypesForDNN.begin(), AdsorbateAtomTypesForDNN.end());
   AdsorbateAtomTypesForDNN.erase(std::unique(AdsorbateAtomTypesForDNN.begin(), AdsorbateAtomTypesForDNN.end()), AdsorbateAtomTypesForDNN.end());
-  for(size_t i = 0; i < AdsorbateAtomTypesForDNN.size(); i++) printf("AdsorbateDNN Types %zu\n", AdsorbateAtomTypesForDNN[i]);
+  for(size_t i = 0; i < AdsorbateAtomTypesForDNN.size(); i++) 
+    fprintf(SystemComponents.OUTPUT, "AdsorbateDNN Types %zu\n", AdsorbateAtomTypesForDNN[i]);
 
   //Hard-coded types for Framework//
   std::vector<size_t> FrameworkAtomTypesForDNN = {0, 1, 2, 3};
@@ -312,7 +313,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
         throw std::runtime_error("Adsorbate Type equals Framework Type for Pseudo Atoms, Weird");
 
       SystemComponents.DNNInteractionList.push_back({(int)ads_type, (int)framework_type, (int)SystemComponents.NumberOfPseudoAtoms[framework_type]});
-      printf("TypeA-B [%zu-%zu], Number: %zu\n", ads_type, framework_type, SystemComponents.NumberOfPseudoAtoms[framework_type]);
+      fprintf(SystemComponents.OUTPUT, "TypeA-B [%zu-%zu], Number: %zu\n", ads_type, framework_type, SystemComponents.NumberOfPseudoAtoms[framework_type]);
     }
   }
   //This determines the number of features for the model// 
@@ -328,7 +329,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
   size_t count = 0;
 
   for(size_t i = 0; i < HostSystem[ads_comp].Molsize; i++)
-    printf("ConsiderThisATom? %d\n", SystemComponents.ConsiderThisAdsorbateAtom[i]);
+    fprintf(SystemComponents.OUTPUT, "ConsiderThisATom? %d\n", SystemComponents.ConsiderThisAdsorbateAtom[i]);
 
   //Loop over framework atoms and the pseudo atoms in the adsorbate, check the Index of the Interaction//
   for(size_t i = 0; i < HostSystem[0].size; i++)
@@ -340,7 +341,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
       size_t typeFramework = HostSystem[0].Type[i];
       size_t InteractionIndex = MatchInteractionIndex(SystemComponents.DNNInteractionList, typeAdsorbate, typeFramework);
       if(i < 5)
-        printf("count: %zu, TypeA-B: [%zu-%zu], InteractionIndex: %zu\n", i * HostSystem[ads_comp].Molsize + j, typeAdsorbate, typeFramework, InteractionIndex);
+        fprintf(SystemComponents.OUTPUT, "count: %zu, TypeA-B: [%zu-%zu], InteractionIndex: %zu\n", i * HostSystem[ads_comp].Molsize + j, typeAdsorbate, typeFramework, InteractionIndex);
       SystemComponents.IndexList[InteractionIndex].push_back(i * HostSystem[ads_comp].Molsize + j);
     }
   //Then, flatten the 2d vector, and reverse the values that you are recording//
@@ -348,7 +349,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
   std::vector<size_t>FlatIndexList;
   for(size_t i = 0; i < SystemComponents.IndexList.size(); i++)
   {
-    printf("Interaction [%zu], Amount [%zu]\n", i, SystemComponents.IndexList[i].size());
+    fprintf(SystemComponents.OUTPUT, "Interaction [%zu], Amount [%zu]\n", i, SystemComponents.IndexList[i].size());
     for(size_t j = 0; j < SystemComponents.IndexList[i].size(); j++)
       FlatIndexList.push_back(SystemComponents.IndexList[i][j]);
   }
@@ -366,7 +367,7 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
     {
       if(!SystemComponents.ConsiderThisAdsorbateAtom[j]) continue;
       if(i < 5)
-        printf("test_count: %zu, TypeA-B: [%zu-%zu], Where it is stored: %zu\n", i * HostSystem[ads_comp].Molsize + j, HostSystem[ads_comp].Type[j], HostSystem[0].Type[i], InverseIndexList[i * HostSystem[ads_comp].Molsize + j]);
+        fprintf(SystemComponents.OUTPUT, "test_count: %zu, TypeA-B: [%zu-%zu], Where it is stored: %zu\n", i * HostSystem[ads_comp].Molsize + j, HostSystem[ads_comp].Type[j], HostSystem[0].Type[i], InverseIndexList[i * HostSystem[ads_comp].Molsize + j]);
     }
 
 
@@ -377,10 +378,10 @@ void Prepare_FeatureMatrix(Simulations& Sim, Components& SystemComponents, Atoms
   cudaMemcpy(SystemComponents.device_InverseIndexList, InverseIndexList.data(), Listsize * sizeof(size_t), cudaMemcpyHostToDevice);
   
   //Use Pinned Memory for slightly better mem transfer//
-  printf("Listsize: %zu\n", Listsize);
+  fprintf(SystemComponents.OUTPUT, "Listsize: %zu\n", Listsize);
   //cudaMallocHost(&SystemComponents.device_Distances, Listsize * sizeof(double));
   //cudaMalloc(&SystemComponents.device_Distances, Listsize * sizeof(double));
-  printf("Size of the device Distance list: %zu\n", Listsize);
+  fprintf(SystemComponents.OUTPUT, "Size of the device Distance list: %zu\n", Listsize);
 }
 
 static inline void WriteDistances(Components& SystemComponents, std::vector<std::vector<double>> Distances)
@@ -458,7 +459,7 @@ double Predict_From_FeatureMatrix_Move(Simulations& Sim, Components& SystemCompo
   double prediction = static_cast<double>(output[0].get_data<float>()[0]);
 
   SystemComponents.DNNPredictTime += omp_get_wtime() - time;
-  //printf("DNN Prediction: %.5f [kJ/mol], %.5f [internal unit]\n", prediction, prediction * SystemComponents.DNNEnergyConversion);
+  //fprintf(SystemComponents.OUTPUT, "DNN Prediction: %.5f [kJ/mol], %.5f [internal unit]\n", prediction, prediction * SystemComponents.DNNEnergyConversion);
   return prediction * SystemComponents.DNNEnergyConversion;
   //Check CPU distances//
   //std::vector<std::vector<double>> CPU_Distances = CalculatePairDistances_CPU(HostSystem, Host_Box, SystemComponents.ConsiderThisAdsorbateAtom, SystemComponents.DNNInteractionList);
@@ -498,7 +499,7 @@ double Predict_From_FeatureMatrix_Total(Simulations& Sim, Components& SystemComp
   {
     double prediction = static_cast<double>(output[0].get_data<float>()[i]);
     tot += prediction;
-    //printf("Molecule %zu, DNN Prediction: %.5f [kJ/mol], %.5f [internal unit]\n", i, prediction, prediction * SystemComponents.DNNEnergyConversion);
+    //fprintf(SystemComponents.OUTPUT, "Molecule %zu, DNN Prediction: %.5f [kJ/mol], %.5f [internal unit]\n", i, prediction, prediction * SystemComponents.DNNEnergyConversion);
   }
   return tot * SystemComponents.DNNEnergyConversion;
 }

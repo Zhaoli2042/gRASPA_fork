@@ -354,7 +354,7 @@ double CreateMolecule_InOneBox(Variables& Vars, size_t systemId, bool AlreadyHas
       //DeltaE.print();
       running_energy += DeltaE.total();
       SystemComponents.CreateMoldeltaE += DeltaE;
-      fprintf(SystemComponents.OUTPUT, "Delta E in creating molecules:\n"); DeltaE.print();
+      fprintf(SystemComponents.OUTPUT, "Delta E in creating molecules: %s", DeltaE.print_to_string().c_str()); //DeltaE.print();
       if(SystemComponents.NumberOfMolecule_for_Component[comp] == OldVal)
       {CreateFailCount ++;} else {SystemComponents.NumberOfCreateMolecules[comp] --; Created ++;}
       if(CreateFailCount > 1e10) throw std::runtime_error("Bad Insertions When Creating Molecules!");

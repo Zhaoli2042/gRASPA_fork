@@ -44,7 +44,7 @@ __global__ void AllocateMoreSpace_CopyBack(Atoms* d_a, Atoms temp, size_t Space,
 
 void AllocateMoreSpace(Atoms*& d_a, size_t SelectedComponent, Components& SystemComponents)
 {
-  printf("Allocating more space on device\n");
+  fprintf(SystemComponents.OUTPUT, "Allocating more space on device\n");
   Atoms temp; // allocate a struct on the device for copying data.
   //Atoms tempSystem[SystemComponents.NComponents.x];
   size_t Copysize=SystemComponents.Allocate_size[SelectedComponent];
@@ -698,7 +698,7 @@ static inline void Update_Max_VolumeChange(Components& SystemComponents)
     if(SystemComponents.VolumeMoveMaxChange > 0.5)
       SystemComponents.VolumeMoveMaxChange=0.5;
 
-  printf("CYCLE: %zu, AccRatio: %.5f, compare_to_target_ratio: %.5f, MaxVolumeChange: %.5f\n", SystemComponents.CURRENTCYCLE, AccRatio, compare_to_target_ratio, SystemComponents.VolumeMoveMaxChange);
+  fprintf(SystemComponents.OUTPUT, "CYCLE: %zu, AccRatio: %.5f, compare_to_target_ratio: %.5f, MaxVolumeChange: %.5f\n", SystemComponents.CURRENTCYCLE, AccRatio, compare_to_target_ratio, SystemComponents.VolumeMoveMaxChange);
  
   SystemComponents.VolumeMoveTotalAccepted += SystemComponents.VolumeMoveAccepted;
   SystemComponents.VolumeMoveTotalAttempts += SystemComponents.VolumeMoveAttempts;

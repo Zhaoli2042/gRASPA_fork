@@ -164,7 +164,7 @@ inline void Prepare_Widom(WidomStruct& Widom, Boxsize Box, Simulations& Sims, Co
   SystemComponents.Trialindex.reserve(MaxTrial);
   SystemComponents.TrialEnergies.reserve(MaxTrial);
 
-  printf("Rosen capacity: %zu\n", SystemComponents.Rosen.capacity());
+  fprintf(SystemComponents.OUTPUT, "Rosen capacity: %zu\n", SystemComponents.Rosen.capacity());
 
   size_t MaxTrialsize = max(Widom.NumberWidomTrials, Widom.NumberWidomTrialsOrientations*(SystemComponents.Moleculesize[1]-1));
 
@@ -192,7 +192,7 @@ inline void Prepare_Widom(WidomStruct& Widom, Boxsize Box, Simulations& Sims, Co
   //Allocate temporary space for reinsertion//
   size_t MaxAdsorbateMolsize = *std::max_element(SystemComponents.Moleculesize.begin() + 1, SystemComponents.Moleculesize.end());;
   cudaMalloc(&SystemComponents.tempMolStorage, MaxAdsorbateMolsize * 2 * sizeof(double3));
-  printf("Allocated %zu double3 for reinsertion!\n", MaxAdsorbateMolsize * 2);
+  fprintf(SystemComponents.OUTPUT, "Allocated %zu double3 for reinsertion!\n", MaxAdsorbateMolsize * 2);
 
   cudaMallocHost(&Sims.Blocksum, blocksum_size*sizeof(double));
   SystemComponents.host_array = (double*) malloc(blocksum_size*sizeof(double));
@@ -385,7 +385,7 @@ inline void Check_Simulation_Energy(Boxsize& Box, Atoms* System, ForceField FF, 
       double GPU_Correction = GPU_Energy.DNN_Correction();
     }
 
-    fprintf(SystemComponents.OUTPUT, "Total GPU Energy: \n"); GPU_Energy.print();
+    fprintf(SystemComponents.OUTPUT, "Total GPU Energy: %s", GPU_Energy.print_to_string().c_str()); //GPU_Energy.print();
     if(SIMULATIONSTAGE == FINAL) SystemComponents.GPU_Energy = GPU_Energy;
   }
 

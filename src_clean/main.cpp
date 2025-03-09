@@ -64,11 +64,12 @@ Variables Initialize(void) //for pybind
   char result[ 256 ];
   ssize_t count = readlink( "/proc/self/exe", result, 256 );
   std::string exepath = std::string( result, (count > 0) ? count : 0 );
-  std::cout << exepath;
+  std::cout << exepath << "\n";
   //Check_Inputs_In_read_data_cpp(exepath);
  
   //Variable for all important structs// 
   Variables Vars;
+  read_debug_mode(Vars);
 
   // SETUP NUMBER OF SIMULATIONS //
   size_t  NumberOfSimulations = 2;
@@ -109,10 +110,10 @@ Variables Initialize(void) //for pybind
 
   bool SameFrameworkEverySimulation = true; //Use the same framework (box) setup for every simulation?//
 
-  printf("------------------GENERAL SIMULATION SETUP-------------\n");
+  fprintf(Vars.OverallOUTPUT, "------------------GENERAL SIMULATION SETUP-------------\n");
   read_simulation_input(Vars, &ReadRestart, &SameFrameworkEverySimulation);
 
-  printf("Finished Checking Number of Components, There are %d framework, %d Adsorbates, %d total Components\n", NComponents.y, NComponents.z, NComponents.x);
+  fprintf(Vars.OverallOUTPUT, "Finished Checking Number of Components, There are %d framework, %d Adsorbates, %d total Components\n", NComponents.y, NComponents.z, NComponents.x);
  
   //Zhao's note: if we need to setup DNN models running just on the CPU, we set env variables before the first cuda call//
   //Then set the env variable back//
@@ -127,15 +128,15 @@ Variables Initialize(void) //for pybind
       //###PATCH_ALLEGRO_MAIN_READMODEL###//
     }
   }
-  printf("DONE Reading Model Info from simulation.input file\n");
+  fprintf(Vars.OverallOUTPUT, "DONE Reading Model Info from simulation.input file\n");
   //setenv("CUDA_VISIBLE_DEVICES", "1", 1); //After setting up tf model, set the GPU as visible again//
 
  
   // UNIFIED MEMORY FOR DIFFERENT SIMULATIONS //
-  //Simulations *Sims; 
+  //Simulations *Sims;
   cudaMallocManaged(&Vars.Sims, NumberOfSimulations*sizeof(Simulations));
   read_Gibbs_and_Cycle_Stats(Vars, Vars.SetMaxStep, Vars.MaxStepPerCycle);
-  printf("-------------------------------------------------------\n");
+  fprintf(Vars.OverallOUTPUT, "-------------------------------------------------------\n");
   // PREPARE VALUES FOR THE FORCEFIELD STRUCT //
   //file in fxn_main.h//
 
@@ -157,9 +158,9 @@ Variables Initialize(void) //for pybind
   {
     //if(sameTemperature)
     if(!samePressure || !sameTemperature) throw std::runtime_error("Currently not allowing the different Pressure/Temperature!");
-    printf("==========================================\n");
-    printf("====== Preparing Simulation box %zu ======\n", a);
-    printf("==========================================\n");
+    fprintf(Vars.OverallOUTPUT, "==========================================\n");
+    fprintf(Vars.OverallOUTPUT, "====== Preparing Simulation box %zu ======\n", a);
+    fprintf(Vars.OverallOUTPUT, "==========================================\n");
     //Allocate data on the host for each simulation//
     Vars.TempComponents.HostSystem  = (Atoms*) malloc(NComponents.x * sizeof(Atoms));
     Vars.TempComponents.ReadRestart = ReadRestart;
@@ -176,7 +177,7 @@ Variables Initialize(void) //for pybind
     {
       Vars.TempComponents.NumberOfPseudoAtoms.resize(Vars.TempComponents.PseudoAtoms.Name.size());
       std::fill(Vars.TempComponents.NumberOfPseudoAtoms.begin(), Vars.TempComponents.NumberOfPseudoAtoms.end(), 0);
-      if(a > 0 && !SameFrameworkEverySimulation) printf("Processing %zu, new framework\n", a);
+      if(a > 0 && !SameFrameworkEverySimulation) fprintf(Vars.OverallOUTPUT, "Processing %zu, new framework\n", a);
       //Read framework data from cif/poscar file//
       ReadFramework(Vars.Box[a], Vars.TempComponents.PseudoAtoms, a, Vars.TempComponents);
       ReadVoidFraction(Vars);
@@ -211,7 +212,7 @@ Variables Initialize(void) //for pybind
         }
         if(comp >= Vars.TempComponents.NComponents.y) //0: framework//
         {
-          printf("Parsing [%zu] Component\n", comp);
+          fprintf(Vars.TempComponents.OUTPUT, "Parsing [%zu] Component\n", comp);
           //skip reading the first component, which is the framework
           read_component_values_from_simulation_input(Vars, Vars.TempComponents, MoveStats, comp-Vars.TempComponents.NComponents.y, Vars.TempComponents.HostSystem[comp], Vars.TempComponents.PseudoAtoms, Vars.Allocate_space_Adsorbate, a);
         }
@@ -293,7 +294,7 @@ Variables Initialize(void) //for pybind
       for(size_t y = 0; y < Vars.SystemComponents[a].Moleculesize[1]; y++)
       {
         Vars.SystemComponents[a].ConsiderThisAdsorbateAtom[y] = ConsiderThisAdsorbateAtom[y];
-        printf("Atom %zu, Consider? %s\n", y, Vars.SystemComponents[a].ConsiderThisAdsorbateAtom[y] ? "true" : "false");
+        fprintf(Vars.SystemComponents[a].OUTPUT, "Atom %zu, Consider? %s\n", y, Vars.SystemComponents[a].ConsiderThisAdsorbateAtom[y] ? "true" : "false");
       }
       //Test reading Tensorflow model//
       //###PATCH_LCLIN_MAIN_PREP###//
@@ -321,9 +322,6 @@ Variables Initialize(void) //for pybind
 
 void RunSimulation(Variables& Vars)
 {
-  printf("============================================\n");
-  printf("== END OF PREPARATION, SIMULATION STARTS! ==\n");
-  printf("============================================\n");
 
   ////////////////
   // RUN CYCLES //
@@ -340,6 +338,9 @@ void RunSimulation(Variables& Vars)
   {
     for(size_t i = 0; i < NumberOfSimulations; i++)
     {
+      fprintf(Vars.SystemComponents[i].OUTPUT, "============================================\n");
+      fprintf(Vars.SystemComponents[i].OUTPUT, "== END OF PREPARATION, SIMULATION STARTS! ==\n");
+      fprintf(Vars.SystemComponents[i].OUTPUT, "============================================\n");
       fprintf(Vars.SystemComponents[i].OUTPUT, "Running Simulation Boxes in SERIAL, currently [%zu] box; pres: %.5f [Pa], temp: %.5f [K]\n", i, Vars.SystemComponents[i].Pressure_Pa, Vars.SystemComponents[i].Temperature);
       Run_Simulation_ForOneBox(Vars, i);
     }
@@ -389,9 +390,6 @@ void RunSimulation(Variables& Vars)
 
 void EndOfSimulationWrapUp(Variables& Vars)
 {
-  printf("========================\n");
-  printf("== END OF SIMULATION! ==\n");
-  printf("========================\n");
 
   size_t NumberOfSimulations = Vars.SystemComponents.size();
   
@@ -401,7 +399,10 @@ void EndOfSimulationWrapUp(Variables& Vars)
   // CALCULATE THE FINAL ENERGY //
   for(size_t i = 0; i < NumberOfSimulations; i++)
   {
-    check_energy_wrapper(Vars, i);
+    fprintf(Vars.SystemComponents[i].OUTPUT, "========================\n");
+    fprintf(Vars.SystemComponents[i].OUTPUT, "== END OF SIMULATION! ==\n");
+    fprintf(Vars.SystemComponents[i].OUTPUT, "========================\n");
+   check_energy_wrapper(Vars, i);
     //Report Random Number Summary and DNN statistics//
     fprintf(Vars.SystemComponents[i].OUTPUT, "Random Numbers Regenerated %zu times, offset: %zu, randomsize: %zu\n", Vars.Random.Rounds, Vars.Random.offset, Vars.Random.randomsize);
   

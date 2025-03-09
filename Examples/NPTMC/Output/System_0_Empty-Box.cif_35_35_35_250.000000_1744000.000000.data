@@ -1,0 +1,2379 @@
+Parsing [1] Component
+-------------- READING Component 0 (CO2)--------------
+=============MC MOVE PROBABILITIES=================
+ACCUMULATED Probabilities:
+Translation Probability:      0.3225806451612903
+Rotation Probability:         0.6451612903225806
+Special Rotation Probability: 0.6451612903225806
+Widom Probability:            0.6451612903225806
+Reinsertion Probability:      0.967741935483871
+Identity Swap Probability:    0.967741935483871
+CBCF Swap Probability:        0.967741935483871
+Swap Probability:             0.967741935483871
+Volume Probability:           1.067741935483871
+Gibbs Swap Probability:       1.067741935483871
+Gibbs Volume Probability:     1.067741935483871
+Sum of Probabilities:         1
+==================================================
+-------------- END OF READING Component 0 (CO2)--------------
+================FUGACITY COEFFICIENT CALCULATION================
+Checking: Current Fugacity Coeff for 1 component: 1.00000
+Every Adsorbate Component has fugacity coefficient assigned, skip EOS calculation!
+Rosen capacity: 8
+----------------- MEMORY ALLOCAION STATUS -----------------
+System allocate_sizes are: 0, 10240
+Component allocate_sizes are: 0, 10240
+Allocated 6 double3 for reinsertion!
+Allocated Blocksum size: 12801, vdw_real size: 12801, fourier_size: 0
+------------------------------------------------------------
+------------------- SIMULATION BOX PARAMETERS -----------------
+Pressure:        0.10503
+Box Volume:      42875.00000
+Box Beta:        0.00481
+Box Temperature: 250.00000
+---------------------------------------------------------------
+======================== CALCULATING INITIAL STAGE ENERGY ========================
+****** Calculating VDW + Real Energy (CPU) ******
+Host-Host   VDW: 0.00000; Real: 0.00000
+Host-Guest  VDW: 0.00000; Real: 0.00000
+Guest-Guest VDW: 0.00000; Real: 0.00000
+********** PRINTING COMPONENT ENERGIES**********
+Compoent [0-0], VDW: 0.00000, Real: 0.00000
+Compoent [0-1], VDW: 0.00000, Real: 0.00000
+Compoent [1-1], VDW: 0.00000, Real: 0.00000
+****** Calculating Ewald Energy (CPU) ******
+CPU Guest-Guest Fourier: 0.00000, Host-Host Fourier: 0.00000, Framework-Guest Fourier: 0.00000
+Component: 0, SelfAtomE: 0.00000 (0.00000 kJ/mol)
+Component: 1, SelfAtomE: 0.00000 (0.00000 kJ/mol)
+Component: 0, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
+Component: 1, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
+HostEwald took 0.00005 sec
+Ewald Summation (total energy) on the CPU took 0.00005 secs
+DEBUG: comp: 0, IntraE: 0.00000, SelfE: 0.00000
+Component 1, Intra Exclusion Energy: -12071.55453 (-14518.75179 kJ/mol)
+Component 1, Atom Self Exclusion Energy: 12087.37520 (14537.77969 kJ/mol)
+DEBUG: comp: 1, IntraE: -12071.55453, SelfE: 12087.37520
+******   Allocating Ewald WaveVectors + StructureFactors (INITIAL STAGE ONLY)   ******
+Allocated 108 108 108 space for eikxyz
+Structure Factor 0 is 0.00000 0.00000
+Structure Factor 1 is 0.00000 0.00000
+Structure Factor 2 is 0.00000 0.00000
+Structure Factor 3 is 0.00000 0.00000
+Structure Factor 4 is 0.00000 0.00000
+Structure Factor 5 is 0.00000 0.00000
+Structure Factor 6 is 0.00000 0.00000
+Structure Factor 7 is 0.00000 0.00000
+Structure Factor 8 is 0.00000 0.00000
+Structure Factor 9 is 0.00000 0.00000
+****** DONE Allocating Ewald WaveVectors + StructureFactors(INITIAL STAGE ONLY) ******
+ ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
+CPU SF: 2601, GPU SF: 2601
+StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 1, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 2, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 3, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 4, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 5, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 6, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 7, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 8, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 9, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+ ****** CHECKING Framework StructureFactors Stored on CPU ****** 
+Framework Structure Factor 0, real: 0.00000 imag: 0.00000
+Framework Structure Factor 1, real: 0.00000 imag: 0.00000
+Framework Structure Factor 2, real: 0.00000 imag: 0.00000
+Framework Structure Factor 3, real: 0.00000 imag: 0.00000
+Framework Structure Factor 4, real: 0.00000 imag: 0.00000
+Framework Structure Factor 5, real: 0.00000 imag: 0.00000
+Framework Structure Factor 6, real: 0.00000 imag: 0.00000
+Framework Structure Factor 7, real: 0.00000 imag: 0.00000
+Framework Structure Factor 8, real: 0.00000 imag: 0.00000
+Framework Structure Factor 9, real: 0.00000 imag: 0.00000
+VDW + Real on the GPU took 0.00000 secs
+Ewald Summation (total energy) on the GPU took 0.00000 secs
+Total GPU Energy: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 0
+HHReal: 0
+HGReal: 0
+GGReal: 0
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0
+TailE: 0
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+====================== DONE CALCULATING INITIAL STAGE ENERGY ======================
+Component 1, Need to create 100 full molecule
+Creating 0 Molecule for Component 1; There are 0 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 0
+HHReal: 0
+HGReal: 0
+GGReal: 0
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.013577716544915575
+TailE: -0.018440064275825816
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 1 Molecule for Component 1; There are 1 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 0
+HHReal: 0
+HGReal: 0
+GGReal: 0
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.03724630972649301
+TailE: -0.055320192827477445
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 2 Molecule for Component 1; There are 2 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 0
+HHReal: 0
+HGReal: 0
+GGReal: 0
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.2011280862795921
+TailE: -0.09220032137912908
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 3 Molecule for Component 1; There are 3 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -0.250888694709991
+HHReal: 0
+HGReal: 0
+GGReal: 0.034243644218414006
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.15055618610482568
+TailE: -0.12908044993078072
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 4 Molecule for Component 1; There are 4 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -0.7024960017066139
+HHReal: 0
+HGReal: 0
+GGReal: -0.28514658336769594
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.5446930865317512
+TailE: -0.16596057848243234
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 5 Molecule for Component 1; There are 5 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -1.4954904577382007
+HHReal: 0
+HGReal: 0
+GGReal: 0.4059589525423326
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -2.1341636170536304
+TailE: -0.20284070703408397
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 6 Molecule for Component 1; There are 6 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -3.800778930412037
+HHReal: 0
+HGReal: 0
+GGReal: 0.0685071221235738
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.8093054868900769
+TailE: -0.2397208355857356
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 7 Molecule for Component 1; There are 7 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 13.248162440907912
+HHReal: 0
+HGReal: 0
+GGReal: -228.11050346457318
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -2.1059136235381946
+TailE: -0.2766009641373872
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 8 Molecule for Component 1; There are 8 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -9.294434958378865
+HHReal: 0
+HGReal: 0
+GGReal: -9.651364274659144
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -3.8989378115207636
+TailE: -0.3134810926890389
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 9 Molecule for Component 1; There are 9 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -7.0846270823420285
+HHReal: 0
+HGReal: 0
+GGReal: 2.3456570496996534
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 2.957546077994543
+TailE: -0.35036122124069047
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 10 Molecule for Component 1; There are 10 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -4.374608165569399
+HHReal: 0
+HGReal: 0
+GGReal: -2.059825255560149
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -2.105913191234471
+TailE: -0.38724134979234215
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 11 Molecule for Component 1; There are 11 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -1.1410627018003563
+HHReal: 0
+HGReal: 0
+GGReal: 0.04096949672695627
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.6023851499086916
+TailE: -0.4241214783439937
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 12 Molecule for Component 1; There are 12 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -85.7495250534395
+HHReal: 0
+HGReal: 0
+GGReal: 27.367073775925633
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 10.183489802513051
+TailE: -0.46100160689564534
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 13 Molecule for Component 1; There are 13 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -3.22881951927885
+HHReal: 0
+HGReal: 0
+GGReal: -0.8704133330332251
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.706141366455828
+TailE: -0.4978817354472971
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 14 Molecule for Component 1; There are 14 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -3.908860610680388
+HHReal: 0
+HGReal: 0
+GGReal: 2.5920076960363794
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.37284557851699596
+TailE: -0.5347618639989486
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 15 Molecule for Component 1; There are 15 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -5.978789125374084
+HHReal: 0
+HGReal: 0
+GGReal: 1.3997667110290664
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 3.565480750581873
+TailE: -0.5716419925506003
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 16 Molecule for Component 1; There are 16 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -156.19927845036608
+HHReal: 0
+HGReal: 0
+GGReal: -43.762513310749455
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 6.879024899563305
+TailE: -0.6085221211022519
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 17 Molecule for Component 1; There are 17 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -148.73633448944489
+HHReal: 0
+HGReal: 0
+GGReal: 42.45997907250603
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 8.004277010161452
+TailE: -0.6454022496539036
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 18 Molecule for Component 1; There are 18 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -4.214396806168896
+HHReal: 0
+HGReal: 0
+GGReal: 0.013818534037808305
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 1.3286190033202203
+TailE: -0.6822823782055553
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 19 Molecule for Component 1; There are 19 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -19.84481204540554
+HHReal: 0
+HGReal: 0
+GGReal: 5.898406758498851
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.09086036106448603
+TailE: -0.7191625067572068
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 20 Molecule for Component 1; There are 20 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -187.01270828030422
+HHReal: 0
+HGReal: 0
+GGReal: -151.24454195619978
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 1.454178627641845
+TailE: -0.7560426353088584
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 21 Molecule for Component 1; There are 21 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -3.7940406888133698
+HHReal: 0
+HGReal: 0
+GGReal: 1.2381105122593024
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 2.1014047885906564
+TailE: -0.7929227638605101
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 22 Molecule for Component 1; There are 22 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -99.20162674309233
+HHReal: 0
+HGReal: 0
+GGReal: 25.33461033383918
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 1.3790171416895802
+TailE: -0.8298028924121617
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 23 Molecule for Component 1; There are 23 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -185.49364403007056
+HHReal: 0
+HGReal: 0
+GGReal: -382.2780058413259
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 5.374572376221408
+TailE: -0.8666830209638133
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 24 Molecule for Component 1; There are 24 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -207.28114144303802
+HHReal: 0
+HGReal: 0
+GGReal: 127.54558538903541
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 11.17931969531
+TailE: -0.9035631495154651
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 25 Molecule for Component 1; There are 25 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -68.50548833358346
+HHReal: 0
+HGReal: 0
+GGReal: 70.43686105798842
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -3.213855582973965
+TailE: -0.9404432780671167
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 26 Molecule for Component 1; There are 26 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -588.8311419424793
+HHReal: 0
+HGReal: 0
+GGReal: 448.4131715097052
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 35.36575996571661
+TailE: -0.9773234066187683
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 27 Molecule for Component 1; There are 27 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -7.343604299632254
+HHReal: 0
+HGReal: 0
+GGReal: 4.209619262382857
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.3737216791639355
+TailE: -1.01420353517042
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 28 Molecule for Component 1; There are 28 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -86.02653193988662
+HHReal: 0
+HGReal: 0
+GGReal: 22.821857256054585
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -9.050675430508075
+TailE: -1.0510836637220715
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 29 Molecule for Component 1; There are 29 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -9.958566430445138
+HHReal: 0
+HGReal: 0
+GGReal: 4.569045084292142
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 3.9258421222575386
+TailE: -1.087963792273723
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 30 Molecule for Component 1; There are 30 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -7.412111217312528
+HHReal: 0
+HGReal: 0
+GGReal: 10.757983515034116
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -3.493530354080221
+TailE: -1.1248439208253749
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 31 Molecule for Component 1; There are 31 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -292.7664193514672
+HHReal: 0
+HGReal: 0
+GGReal: -87.86131255148325
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 4.283545166484746
+TailE: -1.1617240493770264
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 32 Molecule for Component 1; There are 32 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -74.12708364104591
+HHReal: 0
+HGReal: 0
+GGReal: 2.339322345761069
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.5362266041453392
+TailE: -1.198604177928678
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 33 Molecule for Component 1; There are 33 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 45.51580946425079
+HHReal: 0
+HGReal: 0
+GGReal: -313.6938512904228
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 4.491474834997327
+TailE: -1.2354843064803296
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 34 Molecule for Component 1; There are 34 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -249.29790174434777
+HHReal: 0
+HGReal: 0
+GGReal: -122.0222100232844
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 17.93624657150967
+TailE: -1.2723644350319814
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 35 Molecule for Component 1; There are 35 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -34.130521405486675
+HHReal: 0
+HGReal: 0
+GGReal: 2.2541025583631793
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -5.335001124089601
+TailE: -1.309244563583633
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 36 Molecule for Component 1; There are 36 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -110.11749480307336
+HHReal: 0
+HGReal: 0
+GGReal: 18.048862023750956
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -9.28454842555557
+TailE: -1.3461246921352845
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 37 Molecule for Component 1; There are 37 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -210.48416603952032
+HHReal: 0
+HGReal: 0
+GGReal: -45.544873863237854
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -18.38189588175861
+TailE: -1.3830048206869363
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 38 Molecule for Component 1; There are 38 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -108.3402050382062
+HHReal: 0
+HGReal: 0
+GGReal: 0.09625593141332445
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 6.199212359227758
+TailE: -1.4198849492385877
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 39 Molecule for Component 1; There are 39 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -83.30640450419482
+HHReal: 0
+HGReal: 0
+GGReal: -66.21925929104987
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -7.029757956844698
+TailE: -1.4567650777902394
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 40 Molecule for Component 1; There are 40 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -293.6067676085877
+HHReal: 0
+HGReal: 0
+GGReal: -113.75825694693845
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.8173362944826081
+TailE: -1.493645206341891
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 41 Molecule for Component 1; There are 41 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -437.9415233036351
+HHReal: 0
+HGReal: 0
+GGReal: 73.33221718076948
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 11.813370330069624
+TailE: -1.5305253348935426
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 42 Molecule for Component 1; There are 42 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -215.82914169602617
+HHReal: 0
+HGReal: 0
+GGReal: -68.95259086713082
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 11.594149478330436
+TailE: -1.5674054634451944
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 43 Molecule for Component 1; There are 43 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -10.338392202816824
+HHReal: 0
+HGReal: 0
+GGReal: 7.049096289981851
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -5.6994876103720085
+TailE: -1.6042855919968457
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 44 Molecule for Component 1; There are 44 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -237.5514722018041
+HHReal: 0
+HGReal: 0
+GGReal: 155.01783283423467
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 17.350076860680602
+TailE: -1.6411657205484977
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 45 Molecule for Component 1; There are 45 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -528.7247281463688
+HHReal: 0
+HGReal: 0
+GGReal: 2.905342999482798
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 13.388440666968457
+TailE: -1.6780458491001493
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 46 Molecule for Component 1; There are 46 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -258.87763240705226
+HHReal: 0
+HGReal: 0
+GGReal: -74.90296626070639
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 18.451655101478053
+TailE: -1.7149259776518009
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 47 Molecule for Component 1; There are 47 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -180.57044781016722
+HHReal: 0
+HGReal: 0
+GGReal: -47.126869613120846
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.506062957472313
+TailE: -1.7518061062034527
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 48 Molecule for Component 1; There are 48 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -9.022347722322547
+HHReal: 0
+HGReal: 0
+GGReal: 6.459921697921455
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 1.3194490669950056
+TailE: -1.7886862347551042
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 49 Molecule for Component 1; There are 49 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -8.466217918020643
+HHReal: 0
+HGReal: 0
+GGReal: 4.300437515637573
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -2.9932364047598092
+TailE: -1.8255663633067558
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 50 Molecule for Component 1; There are 50 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -280.3160581733964
+HHReal: 0
+HGReal: 0
+GGReal: 185.66078758447208
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -7.41998225059945
+TailE: -1.8624464918584074
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 51 Molecule for Component 1; There are 51 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -3.5029284228917237
+HHReal: 0
+HGReal: 0
+GGReal: 0.2346453792790415
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.161465764048664
+TailE: -1.899326620410059
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 52 Molecule for Component 1; There are 52 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 46.813821055941844
+HHReal: 0
+HGReal: 0
+GGReal: 111.45320686127792
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 26.69833842675923
+TailE: -1.9362067489617107
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 53 Molecule for Component 1; There are 53 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -344.3190508930809
+HHReal: 0
+HGReal: 0
+GGReal: -286.9364839143038
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 12.06700324782539
+TailE: -1.9730868775133623
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 54 Molecule for Component 1; There are 54 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -622.5570878611416
+HHReal: 0
+HGReal: 0
+GGReal: -149.7839722758821
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 9.612923372717514
+TailE: -2.009967006065014
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 55 Molecule for Component 1; There are 55 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -49.89017573411879
+HHReal: 0
+HGReal: 0
+GGReal: 11.052379521747667
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 2.13486875997512
+TailE: -2.0468471346166655
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 56 Molecule for Component 1; There are 56 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -24.757109585459848
+HHReal: 0
+HGReal: 0
+GGReal: -19.28536212769573
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -13.307389056361131
+TailE: -2.083727263168317
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 57 Molecule for Component 1; There are 57 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -192.26662521331414
+HHReal: 0
+HGReal: 0
+GGReal: -389.3736519864631
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 17.930500151731778
+TailE: -2.1206073917199686
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 58 Molecule for Component 1; There are 58 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -21.778181193621037
+HHReal: 0
+HGReal: 0
+GGReal: 11.905787755337816
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -11.665513527126778
+TailE: -2.15748752027162
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 59 Molecule for Component 1; There are 59 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -88.61055352005711
+HHReal: 0
+HGReal: 0
+GGReal: 69.9164230519778
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -17.522851577156043
+TailE: -2.194367648823272
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 60 Molecule for Component 1; There are 60 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -52.60462244861162
+HHReal: 0
+HGReal: 0
+GGReal: 22.30737029752845
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 9.616164309847509
+TailE: -2.2312477773749237
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 61 Molecule for Component 1; There are 61 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -32.97066877378556
+HHReal: 0
+HGReal: 0
+GGReal: 35.66740844624833
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -19.532464142920187
+TailE: -2.2681279059265753
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 62 Molecule for Component 1; There are 62 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -17.006749740094662
+HHReal: 0
+HGReal: 0
+GGReal: 19.29423466271315
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.249236943518019
+TailE: -2.305008034478227
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 63 Molecule for Component 1; There are 63 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -31.283692024096574
+HHReal: 0
+HGReal: 0
+GGReal: -9.456763334869635
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -7.085793400486246
+TailE: -2.341888163029879
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 64 Molecule for Component 1; There are 64 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: 190.7313715748079
+HHReal: 0
+HGReal: 0
+GGReal: 224.358299291685
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 15.662876289670002
+TailE: -2.3787682915815305
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 65 Molecule for Component 1; There are 65 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -730.8440380315116
+HHReal: 0
+HGReal: 0
+GGReal: 286.58476722399917
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 46.92739321459405
+TailE: -2.415648420133182
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 66 Molecule for Component 1; There are 66 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -368.9084050926415
+HHReal: 0
+HGReal: 0
+GGReal: -154.29100337618678
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.3120908791355674
+TailE: -2.452528548684833
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 67 Molecule for Component 1; There are 67 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -100.42778400127428
+HHReal: 0
+HGReal: 0
+GGReal: -24.19910474366127
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 3.4165196313087733
+TailE: -2.489408677236485
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 68 Molecule for Component 1; There are 68 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -354.43964703250737
+HHReal: 0
+HGReal: 0
+GGReal: -163.2183270266583
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -3.0741354258244726
+TailE: -2.5262888057881367
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 69 Molecule for Component 1; There are 69 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -345.0080967048169
+HHReal: 0
+HGReal: 0
+GGReal: 70.02682836951206
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 19.347383033403275
+TailE: -2.5631689343397883
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 70 Molecule for Component 1; There are 70 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -39.76534637722459
+HHReal: 0
+HGReal: 0
+GGReal: -0.8269064353615829
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 4.231584365473616
+TailE: -2.60004906289144
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 71 Molecule for Component 1; There are 71 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -533.9073187209614
+HHReal: 0
+HGReal: 0
+GGReal: -63.369648370305526
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -1.0099843741527081
+TailE: -2.6369291914430915
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 72 Molecule for Component 1; There are 72 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -184.37298309008796
+HHReal: 0
+HGReal: 0
+GGReal: -91.30460283437601
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -6.289422317366327
+TailE: -2.673809319994743
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 73 Molecule for Component 1; There are 73 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -34.82525788805428
+HHReal: 0
+HGReal: 0
+GGReal: 12.628395203548635
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -14.142305591124362
+TailE: -2.710689448546395
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 74 Molecule for Component 1; There are 74 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -380.42893878347536
+HHReal: 0
+HGReal: 0
+GGReal: 45.990527637305604
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 6.236957882755831
+TailE: -2.7475695770980466
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 75 Molecule for Component 1; There are 75 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -73.1765624469795
+HHReal: 0
+HGReal: 0
+GGReal: -36.786179417030134
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -4.076269241806873
+TailE: -2.784449705649698
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 76 Molecule for Component 1; There are 76 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -26.394522062602885
+HHReal: 0
+HGReal: 0
+GGReal: -18.172074022926616
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -4.06082793964295
+TailE: -2.8213298342013498
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 77 Molecule for Component 1; There are 77 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -67.20774896814724
+HHReal: 0
+HGReal: 0
+GGReal: -27.235220264510204
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -3.9770894737302225
+TailE: -2.8582099627530013
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 78 Molecule for Component 1; There are 78 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -66.53338577733476
+HHReal: 0
+HGReal: 0
+GGReal: 19.767597769593046
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -0.28087568258558093
+TailE: -2.8950900913046533
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 79 Molecule for Component 1; There are 79 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -307.36649789755904
+HHReal: 0
+HGReal: 0
+GGReal: -223.85924225472456
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 8.615119654328655
+TailE: -2.9319702198563045
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 80 Molecule for Component 1; There are 80 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -320.6181865663481
+HHReal: 0
+HGReal: 0
+GGReal: -221.63706416081175
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -12.029384608668845
+TailE: -2.968850348407956
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 81 Molecule for Component 1; There are 81 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -138.1211473843203
+HHReal: 0
+HGReal: 0
+GGReal: -69.60525847149438
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -5.622474851042153
+TailE: -3.0057304769596076
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 82 Molecule for Component 1; There are 82 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -607.2199682144105
+HHReal: 0
+HGReal: 0
+GGReal: -70.02898465165526
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 7.33489892662859
+TailE: -3.0426106055112596
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 83 Molecule for Component 1; There are 83 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -495.8074890558775
+HHReal: 0
+HGReal: 0
+GGReal: -515.7586617307743
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -14.692543996668649
+TailE: -3.079490734062911
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 84 Molecule for Component 1; There are 84 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -91.05928365415082
+HHReal: 0
+HGReal: 0
+GGReal: -394.15095469192374
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -4.414966559001822
+TailE: -3.116370862614563
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 85 Molecule for Component 1; There are 85 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -231.17230833260453
+HHReal: 0
+HGReal: 0
+GGReal: -36.519914798433376
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -2.836706785008275
+TailE: -3.1532509911662148
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 86 Molecule for Component 1; There are 86 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -341.42656559745427
+HHReal: 0
+HGReal: 0
+GGReal: -115.7311987262756
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -20.85628946023456
+TailE: -3.1901311197178663
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 87 Molecule for Component 1; There are 87 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -79.77682744827456
+HHReal: 0
+HGReal: 0
+GGReal: -15.83011507067486
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -8.805852270060324
+TailE: -3.2270112482695175
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 88 Molecule for Component 1; There are 88 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -358.92916905933197
+HHReal: 0
+HGReal: 0
+GGReal: 28.30800160018697
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -5.754761111564479
+TailE: -3.2638913768211695
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 89 Molecule for Component 1; There are 89 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -299.68807700241325
+HHReal: 0
+HGReal: 0
+GGReal: 103.63380191984231
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 23.063322598086415
+TailE: -3.3007715053728206
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 90 Molecule for Component 1; There are 90 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -496.6315204640889
+HHReal: 0
+HGReal: 0
+GGReal: 0.9084819651955627
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 7.742443428673219
+TailE: -3.3376516339244726
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 91 Molecule for Component 1; There are 91 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -115.48413895933639
+HHReal: 0
+HGReal: 0
+GGReal: -40.34988238122315
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 0.6065788747677381
+TailE: -3.374531762476124
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 92 Molecule for Component 1; There are 92 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -131.54132814330666
+HHReal: 0
+HGReal: 0
+GGReal: -9.869526239238212
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -18.813051106344094
+TailE: -3.4114118910277758
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 93 Molecule for Component 1; There are 93 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -108.37356603050338
+HHReal: 0
+HGReal: 0
+GGReal: -0.7182875850640045
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -12.637991775105446
+TailE: -3.4482920195794278
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 94 Molecule for Component 1; There are 94 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -84.88957554303103
+HHReal: 0
+HGReal: 0
+GGReal: -7.993808243957551
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 11.009280604454656
+TailE: -3.4851721481310793
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 95 Molecule for Component 1; There are 95 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -120.34558635847281
+HHReal: 0
+HGReal: 0
+GGReal: 69.2090192850459
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -17.07964691183431
+TailE: -3.522052276682731
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 96 Molecule for Component 1; There are 96 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -363.6705345575342
+HHReal: 0
+HGReal: 0
+GGReal: 156.1942747168322
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 9.88286383198346
+TailE: -3.5589324052343825
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 97 Molecule for Component 1; There are 97 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -495.21488370936123
+HHReal: 0
+HGReal: 0
+GGReal: -222.61481936548586
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -15.784264019814437
+TailE: -3.5958125337860345
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 98 Molecule for Component 1; There are 98 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -545.8761455388226
+HHReal: 0
+HGReal: 0
+GGReal: -238.63088645628181
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 3.1943683325070396
+TailE: -3.6326926623376856
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+Creating 99 Molecule for Component 1; There are 99 Molecules of that component in the System
+Delta E in creating molecules: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -307.47375711886946
+HHReal: 0
+HGReal: 0
+GGReal: 97.89700983664852
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: -6.526221731621023
+TailE: -3.6695727908893367
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+======================== CALCULATING CREATE_MOLECULE STAGE ENERGY ========================
+****** Calculating VDW + Real Energy (CPU) ******
+Host-Host   VDW: 0.00000; Real: 0.00000
+Host-Guest  VDW: 0.00000; Real: 0.00000
+Guest-Guest VDW: -16062.84561; Real: -2723.12654
+********** PRINTING COMPONENT ENERGIES**********
+Compoent [0-0], VDW: 0.00000, Real: 0.00000
+Compoent [0-1], VDW: 0.00000, Real: 0.00000
+Compoent [1-1], VDW: -16062.84561, Real: -2723.12654
+****** Calculating Ewald Energy (CPU) ******
+CPU Guest-Guest Fourier: 1684.98896, Host-Host Fourier: 0.00000, Framework-Guest Fourier: 0.00000
+Component: 0, SelfAtomE: 0.00000 (0.00000 kJ/mol)
+Component: 1, SelfAtomE: 1208737.52021 (1453777.96938 kJ/mol)
+Component: 0, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
+Component: 1, Intra-Molecular ExclusionE: 1207155.45341 (1451875.17922 kJ/mol)
+HostEwald took 0.00450 sec
+Ewald Summation (total energy) on the CPU took 0.00450 secs
+ ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
+CPU SF: 2601, GPU SF: 2601
+StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 1, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 2, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 3, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 4, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 5, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 6, CPU: 0.16372 3.13721, GPU: 0.16372 3.13721
+StructureFactor 7, CPU: -5.09498 0.99838, GPU: -5.09498 0.99838
+StructureFactor 8, CPU: 1.19423 2.70159, GPU: 1.19423 2.70159
+StructureFactor 9, CPU: 4.81232 0.92646, GPU: 4.81232 0.92646
+ ****** CHECKING Framework StructureFactors Stored on CPU ****** 
+Framework Structure Factor 0, real: 0.00000 imag: 0.00000
+Framework Structure Factor 1, real: 0.00000 imag: 0.00000
+Framework Structure Factor 2, real: 0.00000 imag: 0.00000
+Framework Structure Factor 3, real: 0.00000 imag: 0.00000
+Framework Structure Factor 4, real: 0.00000 imag: 0.00000
+Framework Structure Factor 5, real: 0.00000 imag: 0.00000
+Framework Structure Factor 6, real: 0.00000 imag: 0.00000
+Framework Structure Factor 7, real: 0.00000 imag: 0.00000
+Framework Structure Factor 8, real: 0.00000 imag: 0.00000
+Framework Structure Factor 9, real: 0.00000 imag: 0.00000
+VDW + Real on the GPU took 0.00045 secs
+Ewald Summation (total energy) on the GPU took 0.00013 secs
+Total GPU Energy: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -16062.845606647072
+HHReal: 0
+HGReal: 0
+GGReal: -2723.1265371938653
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 102.92215688458282
+TailE: -184.40064275825816
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+====================== DONE CALCULATING CREATE_MOLECULE STAGE ENERGY ======================
+============================================
+== END OF PREPARATION, SIMULATION STARTS! ==
+============================================
+Running Simulation Boxes in SERIAL, currently [0] box; pres: 1744000.00000 [Pa], temp: 250.00000 [K]
+==================================
+== RUNNING INITIALIZATION PHASE ==
+==================================
+CBMC Uses 8 trial positions and 8 trial orientations
+Box 0, Volume: 42875.00000
+Total Volume: 42875.00000
+CYCLE: 0, AccRatio: 1.00000, compare_to_target_ratio: 1.50000, MaxVolumeChange: 0.03750
+INITIALIZATION Cycle: 0, 100 Adsorbate Molecules, Total Energy: -20602.69078  ||  Component 0 [Empty-Box.cif], 1 Molecules  ||  Component 1 [CO2], 100 Molecules  ||  
+CYCLE: 500, AccRatio: 0.83679, compare_to_target_ratio: 1.50000, MaxVolumeChange: 0.05625
+CYCLE: 1000, AccRatio: 0.81362, compare_to_target_ratio: 1.50000, MaxVolumeChange: 0.08438
+CYCLE: 1500, AccRatio: 0.70428, compare_to_target_ratio: 1.40855, MaxVolumeChange: 0.11885
+CYCLE: 2000, AccRatio: 0.58047, compare_to_target_ratio: 1.16095, MaxVolumeChange: 0.13797
+CYCLE: 2500, AccRatio: 0.52442, compare_to_target_ratio: 1.04884, MaxVolumeChange: 0.14471
+CYCLE: 3000, AccRatio: 0.55233, compare_to_target_ratio: 1.10466, MaxVolumeChange: 0.15986
+CYCLE: 3500, AccRatio: 0.50506, compare_to_target_ratio: 1.01013, MaxVolumeChange: 0.16148
+CYCLE: 4000, AccRatio: 0.49061, compare_to_target_ratio: 0.98123, MaxVolumeChange: 0.15845
+CYCLE: 4500, AccRatio: 0.48723, compare_to_target_ratio: 0.97445, MaxVolumeChange: 0.15440
+CYCLE: 5000, AccRatio: 0.50031, compare_to_target_ratio: 1.00062, MaxVolumeChange: 0.15449
+INITIALIZATION Cycle: 5000, 100 Adsorbate Molecules, Total Energy: -6431.50495  ||  Component 0 [Empty-Box.cif], 1 Molecules  ||  Component 1 [CO2], 100 Molecules  ||  
+CYCLE: 5500, AccRatio: 0.49725, compare_to_target_ratio: 0.99450, MaxVolumeChange: 0.15364
+CYCLE: 6000, AccRatio: 0.50801, compare_to_target_ratio: 1.01603, MaxVolumeChange: 0.15611
+CYCLE: 6500, AccRatio: 0.51046, compare_to_target_ratio: 1.02092, MaxVolumeChange: 0.15937
+CYCLE: 7000, AccRatio: 0.49969, compare_to_target_ratio: 0.99938, MaxVolumeChange: 0.15927
+CYCLE: 7500, AccRatio: 0.50605, compare_to_target_ratio: 1.01211, MaxVolumeChange: 0.16120
+CYCLE: 8000, AccRatio: 0.46306, compare_to_target_ratio: 0.92613, MaxVolumeChange: 0.14929
+CYCLE: 8500, AccRatio: 0.53080, compare_to_target_ratio: 1.06159, MaxVolumeChange: 0.15849
+CYCLE: 9000, AccRatio: 0.51088, compare_to_target_ratio: 1.02177, MaxVolumeChange: 0.16194
+CYCLE: 9500, AccRatio: 0.49348, compare_to_target_ratio: 0.98696, MaxVolumeChange: 0.15983
+======================== MOVE STATISTICS FOR COMPONENT [1] (CO2) ========================
+=====================TRANSLATION MOVES=====================
+Translation Performed: 310039
+Translation Accepted: 203463
+Max Translation: 5.0000000000, 5.0000000000, 5.0000000000
+===========================================================
+=====================ROTATION MOVES========================
+Rotation Performed: 309586
+Rotation Accepted: 257035
+Max Rotation: 1.3892224568, 1.3892224568, 1.3892224568
+===========================================================
+=====================SWAP MOVES=====================
+Insertion Performed:   0
+Insertion Accepted:    0
+Deletion Performed:    0
+Deletion Accepted:     0
+Reinsertion Performed: 325363
+Reinsertion Accepted:  224990
+====================================================
+=====================IDENTITY SWAP MOVES=====================
+=============================================================
+================================================================================================
+=====================VOLUME MOVE STATISTICS for BOX [0]=====================
+VOLUME MOVE ATTEMPTS:   31017
+VOLUME MOVE ACCEPTED:   17165
+VOLUME MOVE MAX CHANGE: 0.15983
+VOLUME MOVE TOOK    : 17.65714 [seconds]
+======================================================================
+===============================
+== INITIALIZATION PHASE ENDS ==
+===============================
+Running Simulation Boxes in SERIAL, currently [0] box; pres: 1744000.00000 [Pa], temp: 250.00000 [K]
+==================================
+== RUNNING EQUILIBRATION PHASE ==
+==================================
+CBMC Uses 8 trial positions and 8 trial orientations
+===============================
+== EQUILIBRATION PHASE ENDS ==
+===============================
+Running Simulation Boxes in SERIAL, currently [0] box; pres: 1744000.00000 [Pa], temp: 250.00000 [K]
+==================================
+==  RUNNING PRODUCTION PHASE   ==
+==================================
+CBMC Uses 8 trial positions and 8 trial orientations
+CYCLE: 0, AccRatio: 0.51269, compare_to_target_ratio: 1.02539, MaxVolumeChange: 0.16388
+PRODUCTION Cycle: 0, 100 Adsorbate Molecules, Total Energy: -6803.84282  ||  Component 0 [Empty-Box.cif], 1 Molecules  ||  Component 1 [CO2], 100 Molecules  ||  
+Printing: Component: 0 [ Empty-Box.cif ], NumMol: 1, Molsize: 0
+Printing: Component: 1 [ CO2 ], NumMol: 100, Molsize: 3
+Component 0, Molsize: 0
+Component 1, Molsize: 3
+CYCLE: 500, AccRatio: 0.48952, compare_to_target_ratio: 0.97904, MaxVolumeChange: 0.16045
+CYCLE: 1000, AccRatio: 0.47670, compare_to_target_ratio: 0.95340, MaxVolumeChange: 0.15297
+CYCLE: 1500, AccRatio: 0.51942, compare_to_target_ratio: 1.03885, MaxVolumeChange: 0.15891
+CYCLE: 2000, AccRatio: 0.51728, compare_to_target_ratio: 1.03457, MaxVolumeChange: 0.16441
+CYCLE: 2500, AccRatio: 0.49347, compare_to_target_ratio: 0.98695, MaxVolumeChange: 0.16226
+CYCLE: 3000, AccRatio: 0.50384, compare_to_target_ratio: 1.00768, MaxVolumeChange: 0.16351
+CYCLE: 3500, AccRatio: 0.47810, compare_to_target_ratio: 0.95620, MaxVolumeChange: 0.15635
+CYCLE: 4000, AccRatio: 0.49850, compare_to_target_ratio: 0.99700, MaxVolumeChange: 0.15588
+CYCLE: 4500, AccRatio: 0.52063, compare_to_target_ratio: 1.04125, MaxVolumeChange: 0.16231
+CYCLE: 5000, AccRatio: 0.50545, compare_to_target_ratio: 1.01090, MaxVolumeChange: 0.16408
+PRODUCTION Cycle: 5000, 100 Adsorbate Molecules, Total Energy: -6238.34780  ||  Component 0 [Empty-Box.cif], 1 Molecules  ||  Component 1 [CO2], 100 Molecules  ||  
+Printing: Component: 0 [ Empty-Box.cif ], NumMol: 1, Molsize: 0
+Printing: Component: 1 [ CO2 ], NumMol: 100, Molsize: 3
+Component 0, Molsize: 0
+Component 1, Molsize: 3
+CYCLE: 5500, AccRatio: 0.51323, compare_to_target_ratio: 1.02647, MaxVolumeChange: 0.16842
+CYCLE: 6000, AccRatio: 0.49473, compare_to_target_ratio: 0.98946, MaxVolumeChange: 0.16665
+CYCLE: 6500, AccRatio: 0.48254, compare_to_target_ratio: 0.96508, MaxVolumeChange: 0.16083
+CYCLE: 7000, AccRatio: 0.50213, compare_to_target_ratio: 1.00427, MaxVolumeChange: 0.16151
+CYCLE: 7500, AccRatio: 0.49149, compare_to_target_ratio: 0.98299, MaxVolumeChange: 0.15876
+CYCLE: 8000, AccRatio: 0.49411, compare_to_target_ratio: 0.98822, MaxVolumeChange: 0.15689
+CYCLE: 8500, AccRatio: 0.50124, compare_to_target_ratio: 1.00248, MaxVolumeChange: 0.15728
+CYCLE: 9000, AccRatio: 0.50341, compare_to_target_ratio: 1.00683, MaxVolumeChange: 0.15836
+CYCLE: 9500, AccRatio: 0.50920, compare_to_target_ratio: 1.01840, MaxVolumeChange: 0.16127
+======================== MOVE STATISTICS FOR COMPONENT [1] (CO2) ========================
+=====================TRANSLATION MOVES=====================
+Translation Performed: 635869
+Translation Accepted: 416664
+Max Translation: 5.0000000000, 5.0000000000, 5.0000000000
+===========================================================
+=====================ROTATION MOVES========================
+Rotation Performed: 635663
+Rotation Accepted: 507973
+Max Rotation: 3.1400000000, 3.1400000000, 3.1400000000
+===========================================================
+=====================SWAP MOVES=====================
+Insertion Performed:   0
+Insertion Accepted:    0
+Deletion Performed:    0
+Deletion Accepted:     0
+Reinsertion Performed: 650680
+Reinsertion Accepted:  451121
+====================================================
+=====================IDENTITY SWAP MOVES=====================
+=============================================================
+================================================================================================
+============= BLOCK AVERAGES (HEAT OF ADSORPTION: kJ/mol) =========
+COMPONENT [1] (CO2)
+BLOCK [0], Blocksize: 2000, Average: -inf
+BLOCK [1], Blocksize: 2000, Average: -inf
+BLOCK [2], Blocksize: 2000, Average: -inf
+BLOCK [3], Blocksize: 2000, Average: -inf
+BLOCK [4], Blocksize: 2000, Average: -inf
+Overall: Average: -inf, ErrorBar: -nan
+-----------------------------
+==============================================================
+=================== BLOCK AVERAGES (LOADING: # MOLECULES)=============
+COMPONENT [0] (Empty-Box.cif)
+BLOCK [0], Blocksize: 2000, Average: 1.00000, ErrorBar: 0.00000
+BLOCK [1], Blocksize: 2000, Average: 1.00000, ErrorBar: 0.00000
+BLOCK [2], Blocksize: 2000, Average: 1.00000, ErrorBar: 0.00000
+BLOCK [3], Blocksize: 2000, Average: 1.00000, ErrorBar: 0.00000
+BLOCK [4], Blocksize: 2000, Average: 1.00000, ErrorBar: 0.00000
+Overall: Average: 1.00000, ErrorBar: 0.00000
+NO Equation-of-State calculation, no compressibility, cannot calculate Excess Loadings
+----------------------------------------------------------
+COMPONENT [1] (CO2)
+BLOCK [0], Blocksize: 2000, Average: 100.00000, ErrorBar: 0.00000
+BLOCK [1], Blocksize: 2000, Average: 100.00000, ErrorBar: 0.00000
+BLOCK [2], Blocksize: 2000, Average: 100.00000, ErrorBar: 0.00000
+BLOCK [3], Blocksize: 2000, Average: 100.00000, ErrorBar: 0.00000
+BLOCK [4], Blocksize: 2000, Average: 100.00000, ErrorBar: 0.00000
+Overall: Average: 100.00000, ErrorBar: 0.00000
+NO Equation-of-State calculation, no compressibility, cannot calculate Excess Loadings
+----------------------------------------------------------
+======================================================================
+=====================BLOCK AVERAGES (LOADING: mg/g)=============
+COMPONENT [0] (Empty-Box.cif)
+Framework component 0, molar mass: 0.00000
+Framework total mass: 0.00000
+BLOCK [0], Blocksize: 2000, Average: -nan, ErrorBar: -nan
+BLOCK [1], Blocksize: 2000, Average: -nan, ErrorBar: -nan
+BLOCK [2], Blocksize: 2000, Average: -nan, ErrorBar: -nan
+BLOCK [3], Blocksize: 2000, Average: -nan, ErrorBar: -nan
+BLOCK [4], Blocksize: 2000, Average: -nan, ErrorBar: -nan
+Overall: Average: -nan, ErrorBar: -nan
+----------------------------------------------------------
+COMPONENT [1] (CO2)
+Framework component 0, molar mass: 0.00000
+Framework total mass: 0.00000
+BLOCK [0], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [1], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [2], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [3], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [4], Blocksize: 2000, Average: inf, ErrorBar: -nan
+Overall: Average: inf, ErrorBar: -nan
+----------------------------------------------------------
+==============================================================
+=====================BLOCK AVERAGES (LOADING: mol/kg)=============
+COMPONENT [0] (Empty-Box.cif)
+Framework component 0, molar mass: 0.00000
+Framework total mass: 0.00000
+BLOCK [0], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [1], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [2], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [3], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [4], Blocksize: 2000, Average: inf, ErrorBar: -nan
+Overall: Average: inf, ErrorBar: -nan
+----------------------------------------------------------
+COMPONENT [1] (CO2)
+Framework component 0, molar mass: 0.00000
+Framework total mass: 0.00000
+BLOCK [0], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [1], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [2], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [3], Blocksize: 2000, Average: inf, ErrorBar: -nan
+BLOCK [4], Blocksize: 2000, Average: inf, ErrorBar: -nan
+Overall: Average: inf, ErrorBar: -nan
+----------------------------------------------------------
+==============================================================
+=====================BLOCK AVERAGES (LOADING: g/L)=============
+COMPONENT [1] (CO2)
+Total Unit Cells 42875 
+BLOCK [0], Blocksize: 2000, Average: 44.25973, ErrorBar: 10.43180
+BLOCK [1], Blocksize: 2000, Average: 44.15498, ErrorBar: 10.68711
+BLOCK [2], Blocksize: 2000, Average: 44.10714, ErrorBar: 11.29077
+BLOCK [3], Blocksize: 2000, Average: 44.04089, ErrorBar: 10.27745
+BLOCK [4], Blocksize: 2000, Average: 44.12939, ErrorBar: 11.34780
+Overall: Average: 44.13843, ErrorBar: 0.14300
+----------------------------------------------------------
+==============================================================
+=====================BLOCK AVERAGES (VOLUME Å^3)================
+BLOCK [0], Blocksize: 2000, Average: 167316.76514, ErrorBar: 38562.98078
+BLOCK [1], Blocksize: 2000, Average: 167804.28267, ErrorBar: 39241.92844
+BLOCK [2], Blocksize: 2000, Average: 168265.22938, ErrorBar: 41644.53590
+BLOCK [3], Blocksize: 2000, Average: 168150.17023, ErrorBar: 39127.31432
+BLOCK [4], Blocksize: 2000, Average: 168121.71868, ErrorBar: 40458.65233
+Overall: Average: 167931.63322, ErrorBar: 686.70705
+----------------------------------------------------------
+==============================================================
+=====================VOLUME MOVE STATISTICS for BOX [0]=====================
+VOLUME MOVE ATTEMPTS:   63496
+VOLUME MOVE ACCEPTED:   33417
+VOLUME MOVE MAX CHANGE: 0.16127
+VOLUME MOVE TOOK    : 35.23211 [seconds]
+======================================================================
+===============================
+== PRODUCTION PHASE ENDS ==
+===============================
+Work took 172.998231 seconds
+========================
+== END OF SIMULATION! ==
+========================
+======================================
+CHECKING FINAL ENERGY FOR SYSTEM [0]
+======================================
+======================== CALCULATING FINAL STAGE ENERGY ========================
+****** Calculating VDW + Real Energy (CPU) ******
+Host-Host   VDW: 0.00000; Real: 0.00000
+Host-Guest  VDW: 0.00000; Real: 0.00000
+Guest-Guest VDW: -5895.44256; Real: -1974.13570
+********** PRINTING COMPONENT ENERGIES**********
+Compoent [0-0], VDW: 0.00000, Real: 0.00000
+Compoent [0-1], VDW: 0.00000, Real: 0.00000
+Compoent [1-1], VDW: -5895.44256, Real: -1974.13570
+****** Calculating Ewald Energy (CPU) ******
+CPU Guest-Guest Fourier: 1585.86526, Host-Host Fourier: 0.00000, Framework-Guest Fourier: 0.00000
+Component: 0, SelfAtomE: 0.00000 (0.00000 kJ/mol)
+Component: 1, SelfAtomE: 1208737.52021 (1453777.96938 kJ/mol)
+Component: 0, Intra-Molecular ExclusionE: 0.00000 (0.00000 kJ/mol)
+Component: 1, Intra-Molecular ExclusionE: 1207155.45341 (1451875.17922 kJ/mol)
+HostEwald took 0.01425 sec
+Ewald Summation (total energy) on the CPU took 0.01425 secs
+ ****** CHECKING StructureFactors (SF) Stored on CPU vs. GPU ****** 
+CPU SF: 8125, GPU SF: 8125
+StructureFactor 0, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 1, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 2, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 3, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 4, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 5, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 6, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 7, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 8, CPU: 0.00000 0.00000, GPU: 0.00000 0.00000
+StructureFactor 9, CPU: -2.15304 1.00255, GPU: -2.15304 1.00255
+ ****** CHECKING Framework StructureFactors Stored on CPU ****** 
+Framework Structure Factor 0, real: 0.00000 imag: 0.00000
+Framework Structure Factor 1, real: 0.00000 imag: 0.00000
+Framework Structure Factor 2, real: 0.00000 imag: 0.00000
+Framework Structure Factor 3, real: 0.00000 imag: 0.00000
+Framework Structure Factor 4, real: 0.00000 imag: 0.00000
+Framework Structure Factor 5, real: 0.00000 imag: 0.00000
+Framework Structure Factor 6, real: 0.00000 imag: 0.00000
+Framework Structure Factor 7, real: 0.00000 imag: 0.00000
+Framework Structure Factor 8, real: 0.00000 imag: 0.00000
+Framework Structure Factor 9, real: 0.00000 imag: 0.00000
+VDW + Real on the GPU took 0.00047 secs
+Ewald Summation (total energy) on the GPU took 0.00013 secs
+Total GPU Energy: MoveEnergy Decomposition Summary: 
+HHVDW: 0
+HGVDW: 0
+GGVDW: -5895.442555458905
+HHReal: 0
+HGReal: 0
+GGReal: -1974.1357004463837
+HHEwaldE: 0
+HGEwaldE: 0
+GGEwaldE: 3.7984554755362296
+TailE: -43.285238281669315
+DNN_E: 0
+Stored Energies (not summed into total energy): 
+Stored HGVDW:    0
+Stored HGReal:   0
+Stored HGEwaldE: 0
+====================== DONE CALCULATING FINAL STAGE ENERGY ======================
+======================================
+Random Numbers Regenerated 60 times, offset: 181429, randomsize: 333334
+DNN Feature Preparation Time: 0.00000, DNN Prediction Time: 0.00000
+DNN GPU Time: 0.00000, DNN Sort Time: 0.00000, std::sort Time: 0.00000, Featurization Time: 0.00000
+======================== ENERGY SUMMARY (Simulation 0) =========================
+ *** INITIAL STAGE *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          0.00000 (0.00000 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 0.00000 (0.00000 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+ --> Total Ewald [Host-Host]:
+      0.00000 (0.00000 [K])
+ --> Initial Ewald [Host-Host] (excluded):
+      0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        0.00000 (0.00000 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     0.00000 (0.00000 [K])
+Total Energy:               0.00000 (0.00000 [K])
+========================================================================
+ *** CREATE MOLECULE STAGE *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          -16062.84561 (-19319.17449 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: -2723.12654 (-3275.17042 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+ --> Total Ewald [Host-Host]:
+      0.00000 (0.00000 [K])
+ --> Initial Ewald [Host-Host] (excluded):
+      0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        102.92216 (123.78698 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     -184.40064 (-221.78313 [K])
+Total Energy:               -18867.45063 (-22692.34106 [K])
+========================================================================
+ *** RUNNING DELTA_E (CREATE MOLECULE - INITIAL) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          -16062.84561 (-19319.17449 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: -2723.12654 (-3275.17042 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        102.92216 (123.78698 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     -184.40064 (-221.78313 [K])
+Total Energy:               -18867.45063 (-22692.34106 [K])
+========================================================================
+ *** CHECK DELTA_E (CREATE MOLECULE - INITIAL) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          -16062.84561 (-19319.17449 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: -2723.12654 (-3275.17042 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        102.92216 (123.78698 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     -184.40064 (-221.78313 [K])
+Total Energy:               -18867.45063 (-22692.34106 [K])
+========================================================================
+ *** FINAL STAGE *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          -5895.44256 (-7090.59193 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: -1974.13570 (-2374.34095 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+ --> Total Ewald [Host-Host]:
+      0.00000 (0.00000 [K])
+ --> Initial Ewald [Host-Host] (excluded):
+      0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        3.79846 (4.56849 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     -43.28524 (-52.06021 [K])
+Total Energy:               -7909.06504 (-9512.42459 [K])
+========================================================================
+ *** RUNNING DELTA_E (FINAL - CREATE MOLECULE) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          10167.40305 (12228.58256 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 748.99084 (900.82947 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        -99.12370 (-119.21848 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     141.11540 (169.72292 [K])
+Total Energy:               10958.38559 (13179.91647 [K])
+========================================================================
+ *** CHECK DELTA_E (RUNNING FINAL - CREATE MOLECULE) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          10167.40305 (12228.58256 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 748.99084 (900.82947 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        -99.12370 (-119.21848 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     141.11540 (169.72292 [K])
+Total Energy:               10958.38559 (13179.91647 [K])
+========================================================================
+ *** ENERGY DRIFT (CPU FINAL - RUNNING FINAL) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          -0.00000 (-0.00000 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 0.00000 (0.00000 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        -0.00000 (-0.00000 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     0.00000 (0.00000 [K])
+Total Energy:               -0.00000 (-0.00000 [K])
+========================================================================
+ *** GPU DRIFT (GPU FINAL - CPU FINAL) *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          0.00000 (0.00000 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: -0.00000 (-0.00000 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        0.00000 (0.00000 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     0.00000 (0.00000 [K])
+Total Energy:               0.00000 (0.00000 [K])
+========================================================================
+================================================================================
+======================== PRODUCTION PHASE AVERAGE ENERGIES (Simulation 0) =========================
+ *** PRODUCTION PHASE AVERAGE ENERGY *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          10328.11187 (12421.87096 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 741.24901 (891.51819 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        -115.83013 (-139.31171 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     136.63744 (164.33716 [K])
+Total Energy:               11090.16819 (13338.41461 [K])
+========================================================================
+ *** PRODUCTION PHASE AVERAGE ENERGY ERRORBAR *** 
+========================================================================
+VDW [Host-Host]:            0.00000 (0.00000 [K])
+VDW [Host-Guest]:           0.00000 (0.00000 [K])
+VDW [Guest-Guest]:          41.65903 (50.10432 [K])
+Real Coulomb [Host-Host]:   0.00000 (0.00000 [K])
+Real Coulomb [Host-Guest]:  0.00000 (0.00000 [K])
+Real Coulomb [Guest-Guest]: 81.22618 (97.69270 [K])
+Ewald [Host-Host]:          0.00000 (0.00000 [K])
+Ewald [Host-Guest]:         0.00000 (0.00000 [K])
+Ewald [Guest-Guest]:        4.19825 (5.04934 [K])
+DNN Energy:                 0.00000 (0.00000 [K])
+Tail Correction Energy:     0.15474 (0.18611 [K])
+Total Energy:               127.23820 (153.03248 [K])
+========================================================================
+================================================================================
+DNN Rejection Summary:
+Translation+Rotation: 0
+Reinsertion: 0
+Insertion: 0
+Deletion: 0
+SingleSwap: 0
+DNN Drift Summary:
+Translation+Rotation: 0.00000
+Reinsertion: 0.00000
+Insertion: 0.00000
+Deletion: 0.00000
+SingleSwap: 0.00000
+Summary for simulation 0
+PseudoAtom Type: C[0], #: 0
+PseudoAtom Type: H[1], #: 0
+PseudoAtom Type: Zn[2], #: 0
+PseudoAtom Type: N[3], #: 0
+PseudoAtom Type: O[4], #: 0
+PseudoAtom Type: C_co2[5], #: 100
+PseudoAtom Type: O_co2[6], #: 200
+PseudoAtom Type: N_n2[7], #: 0
+PseudoAtom Type: N_com[8], #: 0
+PseudoAtom Type: Lw[9], #: 0
+PseudoAtom Type: Hw[10], #: 0
+PseudoAtom Type: Ow[11], #: 0
+PseudoAtom Type: CH3_sp3[12], #: 0
+PseudoAtom Type: CH4_sp3[13], #: 0
