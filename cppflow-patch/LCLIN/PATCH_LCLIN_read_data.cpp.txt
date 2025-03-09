@@ -6,17 +6,17 @@ void ReadLCLinModelParameters(Components& SystemComponents)
   std::ifstream file("simulation.input");
   while (std::getline(file, str))
   {
-    if (str.find("DNNModelName", 0) != std::string::npos)
+    if (FOUND(str, "DNNModelName"))
     {
       termsScannedLined = split(str, ' ');
       SystemComponents.ModelName.push_back(termsScannedLined[1]);
     }
-    if (str.find("DNNInputLayer", 0) != std::string::npos)
+    if (FOUND(str, "DNNInputLayer"))
     {
       termsScannedLined = split(str, ' ');
       SystemComponents.InputLayer.push_back(termsScannedLined[1]);
     }
-    if (str.find("MaxDNNDrift", 0) != std::string::npos)
+    if FOUND((str, "MaxDNNDrift"))
     {
       termsScannedLined = split(str, ' ');
       SystemComponents.DNNDrift = std::stod(termsScannedLined[1]);

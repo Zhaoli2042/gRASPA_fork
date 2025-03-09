@@ -8,13 +8,13 @@ void ReadAllegroModelParameters(Components& SystemComponents)
 
   while (std::getline(file, str))
   {
-    if (str.find("DNNModelName", 0) != std::string::npos)
+    if (FOUND(str, "DNNModelName"))
     {
       termsScannedLined = split(str, ' ');
       SystemComponents.ModelName.push_back(termsScannedLined[1]);
       found_name = true;
     }
-    if (str.find("MaxDNNDrift", 0) != std::string::npos)
+    if (FOUND(str, "MaxDNNDrift"))
     {
       termsScannedLined = split(str, ' ');
       SystemComponents.DNNDrift = std::stod(termsScannedLined[1]);
