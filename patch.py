@@ -1,16 +1,5 @@
-import pathlib
-
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import glob
 import os
-import os.path as path
-import re
 import shutil
-
-from itertools import repeat
-from typing import NamedTuple
 
 
 class patch:
@@ -61,9 +50,9 @@ def WritePatchTofile(fin, patch_list):
     
     shutil.move(temp, fin)
 
-#provide patch path here
-#it will read whatever after the '/' as the model name
-patch_path= ['cppflow-patch/LCLIN'] # Patch either 'libtorch-patch/Allegro' or 'cppflow-patch/LCLIN'
+# Select either 'libtorch-patch/Allegro' or 'cppflow-patch/LCLIN'.
+# The environment variable avoids editing this file for each build.
+patch_path = [os.environ.get("GRASPA_PATCH_PATH", "cppflow-patch/LCLIN")]
 clean_src = 'src_clean/'
 #patch_keyword = 'PATCH_LCLIN_SINGLE'
 for model in patch_path:

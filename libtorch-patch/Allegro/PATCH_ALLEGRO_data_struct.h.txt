@@ -1,5 +1,6 @@
 PATCH_ALLEGRO_DATA_STRUCT_H
 #include <torch/script.h> // One-stop header.
+#include "dnn_energy_reference.h"
 
 PATCH_ALLEGRO_VARIABLES
   //Allegro Model//

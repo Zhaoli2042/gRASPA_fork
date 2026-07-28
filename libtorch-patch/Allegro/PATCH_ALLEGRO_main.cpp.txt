@@ -9,6 +9,8 @@ PATCH_ALLEGRO_MAIN_PREP
       {
         printf("Setting up Allegro model\n");
         Vars.SystemComponents[a].DNN.ReadModel(Vars.SystemComponents[a].ModelName[0]);
+        Vars.SystemComponents[a].DNN.ModelUsesTotalEnergy =
+            Comp_for_DNN_Model[a].DNN.ModelUsesTotalEnergy;
         printf("DONE Reading the model, model name %s\n", Vars.SystemComponents[a].ModelName[0].c_str());
         Vars.SystemComponents[a].DNN.Match_Element_PseudoAtom_with_model(Vars.SystemComponents[a].PseudoAtoms);
 
