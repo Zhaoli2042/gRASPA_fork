@@ -19,10 +19,18 @@ int main()
   const bool selected[] = {true, false, true, true};
   int destination[] = {0, 0, 0};
   const size_t copied =
-      CopySelectedDNNAtoms(source, destination, selected, 4);
+      CopySelectedDNNAtoms(source, destination, selected, 4, 3);
   assert(copied == 3);
   assert(destination[0] == 10);
   assert(destination[1] == 30);
   assert(destination[2] == 40);
+
+  int guarded_destination[] = {-1, -1, 99};
+  const size_t overflow_count =
+      CopySelectedDNNAtoms(source, guarded_destination, selected, 4, 2);
+  assert(overflow_count == 3);
+  assert(guarded_destination[0] == -1);
+  assert(guarded_destination[1] == -1);
+  assert(guarded_destination[2] == 99);
   return 0;
 }

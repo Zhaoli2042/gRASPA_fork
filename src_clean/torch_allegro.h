@@ -595,27 +595,60 @@ struct Allegro
       size_t comp,
       double DNNEnergyConversion)
   {
-    const size_t HostUCSize = UCAtoms[0].size;
-    const size_t HostReplicaSize = ReplicaAtoms[0].size;
-    const size_t GuestUCSize = UCAtoms[comp].size;
-    const size_t GuestReplicaSize = ReplicaAtoms[comp].size;
+    struct AtomSizeRestoreGuard
+    {
+      Atoms& HostUC;
+      Atoms& HostReplica;
+      Atoms& GuestUC;
+      Atoms& GuestReplica;
+      const size_t HostUCSize;
+      const size_t HostReplicaSize;
+      const size_t GuestUCSize;
+      const size_t GuestReplicaSize;
+
+      AtomSizeRestoreGuard(
+          Atoms& host_uc,
+          Atoms& host_replica,
+          Atoms& guest_uc,
+          Atoms& guest_replica)
+          : HostUC(host_uc),
+            HostReplica(host_replica),
+            GuestUC(guest_uc),
+            GuestReplica(guest_replica),
+            HostUCSize(host_uc.size),
+            HostReplicaSize(host_replica.size),
+            GuestUCSize(guest_uc.size),
+            GuestReplicaSize(guest_replica.size)
+      {
+      }
+
+      ~AtomSizeRestoreGuard()
+      {
+        HostUC.size = HostUCSize;
+        HostReplica.size = HostReplicaSize;
+        GuestUC.size = GuestUCSize;
+        GuestReplica.size = GuestReplicaSize;
+      }
+    };
+
+    AtomSizeRestoreGuard RestoreSizes(
+        UCAtoms[0],
+        ReplicaAtoms[0],
+        UCAtoms[comp],
+        ReplicaAtoms[comp]);
 
     UCAtoms[comp].size = 0;
     ReplicaAtoms[comp].size = 0;
     HostReferenceEnergy =
         RawMCEnergyWrapper(comp, false, DNNEnergyConversion);
 
-    UCAtoms[comp].size = GuestUCSize;
-    ReplicaAtoms[comp].size = GuestReplicaSize;
+    UCAtoms[comp].size = RestoreSizes.GuestUCSize;
+    ReplicaAtoms[comp].size = RestoreSizes.GuestReplicaSize;
     UCAtoms[0].size = 0;
     ReplicaAtoms[0].size = 0;
     GuestReferenceEnergy =
         RawMCEnergyWrapper(comp, false, DNNEnergyConversion);
 
-    UCAtoms[0].size = HostUCSize;
-    ReplicaAtoms[0].size = HostReplicaSize;
-    UCAtoms[comp].size = GuestUCSize;
-    ReplicaAtoms[comp].size = GuestReplicaSize;
     ReferenceEnergyInitialized = true;
 
     printf(

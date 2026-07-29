@@ -5,7 +5,8 @@ void Check_DNNAtom_and_copy_pos_to_UCAtoms(double3* temp_pos, Atoms& UCAtoms, bo
       temp_pos,
       UCAtoms.pos,
       ConsiderThisAdsorbateAtom,
-      Molsize);
+      Molsize,
+      UCAtoms.size);
   if(copied != UCAtoms.size)
     throw std::runtime_error(
         "Number of selected DNN adsorbate atoms does not match Allegro input");

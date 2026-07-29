@@ -22,7 +22,10 @@ void ReadAllegroModelParameters(Components& SystemComponents)
     }
     if (str.find("DNNModelEnergyMode", 0) != std::string::npos)
     {
-      termsScannedLined = split(str, ' ');
+      Split_Tab_Space(termsScannedLined, str);
+      if(termsScannedLined.size() < 2)
+        throw std::runtime_error(
+            "DNNModelEnergyMode requires total or interaction");
       if(caseInSensStringCompare(termsScannedLined[1], "total"))
         SystemComponents.DNN.ModelUsesTotalEnergy = true;
       else if(!caseInSensStringCompare(termsScannedLined[1], "interaction"))
