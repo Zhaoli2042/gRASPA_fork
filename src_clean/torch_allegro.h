@@ -332,12 +332,11 @@ struct Allegro
 
     auto output = Model.forward(input_vector).toGenericDict();
 
-    torch::Tensor atomic_energy_tensor = output.at("atomic_energy").toTensor().cpu();
-    auto atomic_energies = atomic_energy_tensor.accessor<float, 2>();
+    torch::Tensor atomic_energy_tensor =
+        output.at("atomic_energy").toTensor().cpu().to(torch::kFloat64);
+    auto atomic_energies = atomic_energy_tensor.accessor<double, 2>();
 
-    float atomic_energy_sum = atomic_energy_tensor.sum().data_ptr<float>()[0];
-
-    float nAtomSum = 0.0;
+    double nAtomSum = 0.0;
     for(size_t i = 0; i < nAtoms; i++)
     {
       size_t AtomIndex = i;
