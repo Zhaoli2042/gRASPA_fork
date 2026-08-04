@@ -1,13 +1,15 @@
 PATCH_ALLEGRO_CONSIDER_DNN_ATOMS
 void Check_DNNAtom_and_copy_pos_to_UCAtoms(double3* temp_pos, Atoms& UCAtoms, bool* ConsiderThisAdsorbateAtom, size_t Molsize)
 {
-  size_t update_i = 0;
-  for(size_t i = 0; i < Molsize; i++)
-  {
-    if(ConsiderThisAdsorbateAtom[i])
-      UCAtoms.pos[update_i] = temp_pos[i];
-    update_i ++;
-  }
+  const size_t copied = CopySelectedDNNAtoms(
+      temp_pos,
+      UCAtoms.pos,
+      ConsiderThisAdsorbateAtom,
+      Molsize,
+      UCAtoms.size);
+  if(copied != UCAtoms.size)
+    throw std::runtime_error(
+        "Number of selected DNN adsorbate atoms does not match Allegro input");
 }
 
 PATCH_ALLEGRO_INSERTION

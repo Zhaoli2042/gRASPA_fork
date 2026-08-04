@@ -16,6 +16,10 @@ struct Allegro
   size_t DNN_Molsize = 0; //Atom size to be considered for DNN, since there might be fictional atom sites for a classical sim molecule
 
   size_t nstep = 0;
+  bool ModelUsesTotalEnergy = false;
+  bool ReferenceEnergyInitialized = false;
+  double HostReferenceEnergy = 0.0;
+  double GuestReferenceEnergy = 0.0;
 
   void Match_Element_PseudoAtom_with_model(PseudoAtomDefinitions& PseudoAtoms)
   {
@@ -210,7 +214,7 @@ struct Allegro
       UCAtoms[comp].pos[update_i]  = HostAtoms.pos[i];
       size_t SymbolIdx = Match_AllegroElement_PseudoAtom_order[HostAtoms.Type[i]];
       UCAtoms[comp].Type[update_i] = SymbolIdx;
-      if(i < 5 || i > (NAtoms - 5)) printf("Component %zu, Atom %zu, xyz %f %f %f, Type %zu, SymbolIndex %zu\n", comp, i, UCAtoms[comp].pos[i].x, UCAtoms[comp].pos[i].y, UCAtoms[comp].pos[i].z, HostAtoms.Type[i], UCAtoms[comp].Type[i]);
+      if(i < 5 || i > (NAtoms - 5)) printf("Component %zu, Atom %zu, xyz %f %f %f, Type %zu, SymbolIndex %zu\n", comp, i, UCAtoms[comp].pos[update_i].x, UCAtoms[comp].pos[update_i].y, UCAtoms[comp].pos[update_i].z, HostAtoms.Type[i], UCAtoms[comp].Type[update_i]);
       update_i ++;
     }
   }
@@ -328,12 +332,11 @@ struct Allegro
 
     auto output = Model.forward(input_vector).toGenericDict();
 
-    torch::Tensor atomic_energy_tensor = output.at("atomic_energy").toTensor().cpu();
-    auto atomic_energies = atomic_energy_tensor.accessor<float, 2>();
+    torch::Tensor atomic_energy_tensor =
+        output.at("atomic_energy").toTensor().cpu().to(torch::kFloat64);
+    auto atomic_energies = atomic_energy_tensor.accessor<double, 2>();
 
-    float atomic_energy_sum = atomic_energy_tensor.sum().data_ptr<float>()[0];
-
-    float nAtomSum = 0.0;
+    double nAtomSum = 0.0;
     for(size_t i = 0; i < nAtoms; i++)
     {
       size_t AtomIndex = i;
@@ -572,8 +575,10 @@ struct Allegro
       */
     }
   }
-  //This function is called after the position of the trial adsorbate molecule is prepared in UCAtoms//
-  double MCEnergyWrapper(size_t comp, bool Initialize, double DNNEnergyConversion)
+  double RawMCEnergyWrapper(
+      size_t comp,
+      bool Initialize,
+      double DNNEnergyConversion)
   {
     WrapSuperCellAtomIntoUCBox(comp);
     GenerateReplicaCells(Initialize);
@@ -583,6 +588,92 @@ struct Allegro
     //This generates the unit of eV, convert to 10J/mol.
     //https://www.weizmann.ac.il/oc/martin/tools/hartree.html
     return DNN_E * DNNEnergyConversion;
+  }
+
+  void InitializeReferenceEnergies(
+      size_t comp,
+      double DNNEnergyConversion)
+  {
+    struct AtomSizeRestoreGuard
+    {
+      Atoms& HostUC;
+      Atoms& HostReplica;
+      Atoms& GuestUC;
+      Atoms& GuestReplica;
+      const size_t HostUCSize;
+      const size_t HostReplicaSize;
+      const size_t GuestUCSize;
+      const size_t GuestReplicaSize;
+
+      AtomSizeRestoreGuard(
+          Atoms& host_uc,
+          Atoms& host_replica,
+          Atoms& guest_uc,
+          Atoms& guest_replica)
+          : HostUC(host_uc),
+            HostReplica(host_replica),
+            GuestUC(guest_uc),
+            GuestReplica(guest_replica),
+            HostUCSize(host_uc.size),
+            HostReplicaSize(host_replica.size),
+            GuestUCSize(guest_uc.size),
+            GuestReplicaSize(guest_replica.size)
+      {
+      }
+
+      ~AtomSizeRestoreGuard()
+      {
+        HostUC.size = HostUCSize;
+        HostReplica.size = HostReplicaSize;
+        GuestUC.size = GuestUCSize;
+        GuestReplica.size = GuestReplicaSize;
+      }
+    };
+
+    AtomSizeRestoreGuard RestoreSizes(
+        UCAtoms[0],
+        ReplicaAtoms[0],
+        UCAtoms[comp],
+        ReplicaAtoms[comp]);
+
+    UCAtoms[comp].size = 0;
+    ReplicaAtoms[comp].size = 0;
+    HostReferenceEnergy =
+        RawMCEnergyWrapper(comp, false, DNNEnergyConversion);
+
+    UCAtoms[comp].size = RestoreSizes.GuestUCSize;
+    ReplicaAtoms[comp].size = RestoreSizes.GuestReplicaSize;
+    UCAtoms[0].size = 0;
+    ReplicaAtoms[0].size = 0;
+    GuestReferenceEnergy =
+        RawMCEnergyWrapper(comp, false, DNNEnergyConversion);
+
+    ReferenceEnergyInitialized = true;
+
+    printf(
+        "Allegro total-energy references: host %.10f, guest %.10f\n",
+        HostReferenceEnergy,
+        GuestReferenceEnergy);
+  }
+
+  //This function is called after the position of the trial adsorbate molecule is prepared in UCAtoms//
+  double MCEnergyWrapper(size_t comp, bool Initialize, double DNNEnergyConversion)
+  {
+    if(!ModelUsesTotalEnergy)
+      return RawMCEnergyWrapper(comp, Initialize, DNNEnergyConversion);
+
+    if(Initialize && !ReferenceEnergyInitialized)
+    {
+      RawMCEnergyWrapper(comp, true, DNNEnergyConversion);
+      InitializeReferenceEnergies(comp, DNNEnergyConversion);
+    }
+
+    double CombinedEnergy =
+        RawMCEnergyWrapper(comp, false, DNNEnergyConversion);
+    return DNNHostGuestInteractionEnergy(
+        CombinedEnergy,
+        HostReferenceEnergy,
+        GuestReferenceEnergy);
   }
   /*
   void CopyHostToUCAtoms(double3* pos, size_t comp, size_t Molsize)

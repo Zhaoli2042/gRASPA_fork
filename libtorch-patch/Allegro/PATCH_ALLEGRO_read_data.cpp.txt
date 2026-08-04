@@ -20,9 +20,24 @@ void ReadAllegroModelParameters(Components& SystemComponents)
       SystemComponents.DNNDrift = std::stod(termsScannedLined[1]);
       found_drift = true;
     }
+    if (str.find("DNNModelEnergyMode", 0) != std::string::npos)
+    {
+      Split_Tab_Space(termsScannedLined, str);
+      if(termsScannedLined.size() < 2)
+        throw std::runtime_error(
+            "DNNModelEnergyMode requires total or interaction");
+      if(caseInSensStringCompare(termsScannedLined[1], "total"))
+        SystemComponents.DNN.ModelUsesTotalEnergy = true;
+      else if(!caseInSensStringCompare(termsScannedLined[1], "interaction"))
+        throw std::runtime_error(
+            "DNNModelEnergyMode must be total or interaction");
+    }
   }
   if(!found_name)  throw std::runtime_error("Model Name not found!!!!");
   if(!found_drift) throw std::runtime_error("Drift parameter not found!!!!");
 
   printf("DNN Model Name: %s\n", SystemComponents.ModelName[0].c_str());
+  printf(
+      "DNN Model Energy Mode: %s\n",
+      SystemComponents.DNN.ModelUsesTotalEnergy ? "total" : "interaction");
 }
