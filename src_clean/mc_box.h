@@ -210,6 +210,11 @@ void VolumeMove(Components& SystemComponents, Simulations& Sim, ForceField FF)
   if(LengthSQ < 4.0*FF.CutOffVDW || LengthSQ < 4.0*FF.CutOffCoul)
   {
     printf("Cycle: %zu, Box LengthSQ %.5f (%.5f) < Cutoff\n", SystemComponents.CURRENTCYCLE, LengthSQ, std::sqrt(LengthSQ));
+    //Reject, like NVTGibbsMove does: a box below twice the cutoff breaks the single
+    //minimum-image assumption in the VDW/Real/Ewald kernels, so energies computed in it
+    //are silently wrong (an emptied box under pressure would otherwise shrink through
+    //this limit and keep going). The attempt was already counted above.//
+    return;
   }
 
   MoveEnergy CurrentE;
@@ -226,6 +231,13 @@ void VolumeMove(Components& SystemComponents, Simulations& Sim, ForceField FF)
   }
   Sim.Box.Volume = newV;
   Setup_threadblock(totMol, Nblock, Nthread);
+  //Zhao's note: ScalePositions rescales the BOX (Cell/InverseCell/Volume/kmax) in its
+  //i == 0 branch, which sits OUTSIDE the "i < TotalMol" guard. When a box empties out
+  //(possible with GibbsParticleXfer + NPT volume moves) Setup_threadblock returns early
+  //without touching Nblock/Nthread, leaving them 0 -> <<<0,0>>> is an invalid launch
+  //config and the run dies with "invalid configuration argument". Launch a single
+  //thread so the box rescale still happens; the per-molecule loop is a no-op anyway.//
+  if(Nblock == 0 || Nthread == 0) { Nblock = 1; Nthread = 1; }
   ScalePositions<<<Nblock, Nthread>>>(Sim.d_a, Sim.Box, Scale, SystemComponents.NComponents.x, ScaleFirstComponentFramework, totMol, FF.noCharges, Sim.device_flag, newV);
   checkCUDAError("VolumeMove: Error in ScalePositions\n");
 
@@ -289,15 +301,35 @@ void VolumeMove(Components& SystemComponents, Simulations& Sim, ForceField FF)
     Setup_threadblock(totMol, Nblock, Nthread);
     //Copy xyz data from new to old, also update box lengths//
     totMol = SystemComponents.TotalNumberOfMolecules - SystemComponents.NumberOfFrameworks;
+    //CopyScaledPositions has no i == 0 side effect, so with nothing to copy the launch
+    //is simply skipped (an empty <<<0,0>>> launch would abort the run).//
+    if(Nblock > 0 && Nthread > 0)
     CopyScaledPositions<<<Nblock, Nthread>>>(Sim.d_a, SystemComponents.NComponents.x, ScaleFirstComponentFramework, totMol);
     checkCUDAError("Volume Move: Error in CopyScaledPositions\n");
     SystemComponents.deltaE += DeltaE;
     //Update Eik if accepted from tempEik to StoredEik, BUG (adsorbate/framework species all needs to be updated)!!!//
     if(!FF.noCharges)
     {
-      std::swap(Sim.Box.tempEik,          Sim.Box.AdsorbateEik);
-      std::swap(Sim.Box.tempFrameworkEik, Sim.Box.FrameworkEik);
-      SystemComponents.EikAllocateSize = SystemComponents.tempEikAllocateSize;
+      //Ewald_TotalEnergy writes tempEik only when the box holds at least one atom (its body
+      //is guarded by NTotalAtom > 0). For an accepted volume move on an EMPTY box the swap
+      //would install a stale structure factor (e.g. the pre-deletion one parked in tempEik by
+      //the last accepted move) and corrupt every subsequent Ewald difference in this box.
+      //The true structure factor of an empty box is exactly zero for every k-vector -- and
+      //kmax may have changed with the box -- so zero the stored vectors instead of swapping.//
+      size_t NAtomEwald = 0;
+      for(size_t comp = 0; comp < SystemComponents.NComponents.x; comp++)
+        NAtomEwald += SystemComponents.Moleculesize[comp] * SystemComponents.NumberOfMolecule_for_Component[comp];
+      if(NAtomEwald > 0)
+      {
+        std::swap(Sim.Box.tempEik,          Sim.Box.AdsorbateEik);
+        std::swap(Sim.Box.tempFrameworkEik, Sim.Box.FrameworkEik);
+        SystemComponents.EikAllocateSize = SystemComponents.tempEikAllocateSize;
+      }
+      else
+      {
+        cudaMemset(Sim.Box.AdsorbateEik, 0, SystemComponents.EikAllocateSize * sizeof(Complex));
+        cudaMemset(Sim.Box.FrameworkEik, 0, SystemComponents.EikAllocateSize * sizeof(Complex));
+      }
     }
   }
   else
@@ -383,9 +415,13 @@ void NVTGibbsMove(std::vector<Components>& SystemComponents, Simulations*& Sims,
         if(TotSize * 2 > SystemComponents[sim].Allocate_size[comp]) throw std::runtime_error("Allocate More space for adsorbates on the GPU!!!");
       }
       Setup_threadblock(totMol, Nblock, Nthread);
+      //Same empty-box guard as the NPT VolumeMove path: ScalePositions must always run
+      //with >= 1 thread so its i == 0 branch can rescale the box. (The previous
+      //Get_TotalNumberOfMolecule_In_Box guard here was commented out precisely because
+      //skipping the launch would leave the box unscaled -- clamping is the correct fix.)//
+      if(Nblock == 0 || Nthread == 0) { Nblock = 1; Nthread = 1; }
 
       Sims[sim].Box.Volume = newV[sim];
-      //if(Get_TotalNumberOfMolecule_In_Box(SystemComponents[sim]) > 1e-10)
       ScalePositions<<<Nblock, Nthread>>>(Sims[sim].d_a, Sims[sim].Box, ScaleAB[sim], SystemComponents[sim].NComponents.x, ScaleFramework, totMol, FF.noCharges, Sims[sim].device_flag, newV[sim]);
       checkCUDAError("error Scaling Positions in NVTGibbsVolumeMove\n");
 
@@ -450,15 +486,32 @@ void NVTGibbsMove(std::vector<Components>& SystemComponents, Simulations*& Sims,
       SystemComponents[sim].deltaE += DeltaE[sim];
       Setup_threadblock(totMol, Nblock, Nthread);
       //Copy xyz data from new to old, also update box lengths//
-      if(Get_TotalNumberOfMolecule_In_Box(SystemComponents[sim]) > 1e-10)
+      //Guard on the launch config (like VolumeMove above), NOT on
+      //Get_TotalNumberOfMolecule_In_Box: that count subtracts fractional molecules, so a box
+      //holding only its fractional molecule (totMol = 1) would skip the copy and keep an
+      //unscaled position after the box was rescaled. Nblock > 0 iff totMol > 0.//
+      if(Nblock > 0 && Nthread > 0)
       CopyScaledPositions<<<Nblock, Nthread>>>(Sims[sim].d_a, SystemComponents[sim].NComponents.x, ScaleFramework, totMol);
       checkCUDAError("NVTGibbs: Error in CopyScaledPositions\n");
       //Update Eik if accepted from tempEik to StoredEik, BUG (adsorbate/framework species all needs to be updated)!!!//
       if(!FF.noCharges)
       {
-        std::swap(Sims[sim].Box.tempEik,          Sims[sim].Box.AdsorbateEik);
-        std::swap(Sims[sim].Box.tempFrameworkEik, Sims[sim].Box.FrameworkEik);
-        SystemComponents[sim].EikAllocateSize = SystemComponents[sim].tempEikAllocateSize;
+        //Same empty-box guard as VolumeMove: Ewald_TotalEnergy never wrote this box's tempEik
+        //if it holds zero atoms, so swapping would install a stale structure factor.//
+        size_t NAtomEwald = 0;
+        for(size_t comp = 0; comp < SystemComponents[sim].NComponents.x; comp++)
+          NAtomEwald += SystemComponents[sim].Moleculesize[comp] * SystemComponents[sim].NumberOfMolecule_for_Component[comp];
+        if(NAtomEwald > 0)
+        {
+          std::swap(Sims[sim].Box.tempEik,          Sims[sim].Box.AdsorbateEik);
+          std::swap(Sims[sim].Box.tempFrameworkEik, Sims[sim].Box.FrameworkEik);
+          SystemComponents[sim].EikAllocateSize = SystemComponents[sim].tempEikAllocateSize;
+        }
+        else
+        {
+          cudaMemset(Sims[sim].Box.AdsorbateEik, 0, SystemComponents[sim].EikAllocateSize * sizeof(Complex));
+          cudaMemset(Sims[sim].Box.FrameworkEik, 0, SystemComponents[sim].EikAllocateSize * sizeof(Complex));
+        }
       }
     }
   }
